@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <title>Exam</title>
+</head>
+<body>
+    <h1>EXAM FUNCTIONALITIES LISTED BELOW</h1>
+    <form action="{% url 'exam_result' %}" method="POST">
+        {% csrf_token %}
+        <label>Create a New Exam</label><input type="checkbox" value="on" name="newexam"/> <input type="integer" name="createexam" placeholder="Enter a Question List"/><br><br>
+        <label>Create Shuffled</label><input type="checkbox" name="shuffled"/><input type="integer" name="createshuffled" placeholder="Enter the Booklet Amount"/><br><br>
+        <label>Get Exam Latex</label><input type="checkbox" name="examlatex"/><input type="integer" name="getexamlatex" placeholder="Enter the Booklet No For Exam Latex"/><br><br>
+        <label>Get Exam PDF</label><input type="checkbox" name="exampdf"/><input type="integer" name="getexampdf" placeholder="Enter the Booklet No For Exam PDF"/><br><br>
+        <label>Get Answer Latex</label><input type="checkbox" name="keylatex"/><input type="integer" name="getanswerlatex" placeholder="Enter the Booklet No For Key Latex"/><br><br>
+        <label>Get Answer PDF</label><input type="checkbox" name="keypdf"/><input type="integer" name="getkeypdf" placeholder="Enter the Booklet No For Key PDF"/><br><br>
+        <label>Get CSV Key</label><input type="checkbox" name="csvkey"/><br><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
+
+<script>
+var radios = $('[type="radio"]');
+
+radios.change(function() {
+  radios.not(this).prop('checked', false);
+});
+</script>

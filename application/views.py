@@ -147,7 +147,7 @@ def question(request):
         #        print("ANAN")
 
 
-def getLatexText(self, iterator, shuffled=False):
+def getLatexText(iterator, shuffled=False):
 
 		answers = []
 
@@ -235,13 +235,14 @@ def qbank_detail(request):
             shuffle = False
             if "shufflelatex" in request.POST:
                 shuffle = True
-            iterator = request.POST["getlatex"]
+            iterator = request.POST["getlatex"].split(",")
             answer = getLatex(iterator,shuffle)
         if "latextext" in request.POST:
             shuffle = False
             if "shufflelatextext" in request.POST:
                 shuffle = True
-            iterator = request.POST["getlatextext"]
+            iterator = request.POST["getlatextext"].split(",")
+            print(iterator)
             answer = getLatexText(iterator,shuffle)
 
         if "updatedate" in request.POST:
@@ -346,6 +347,23 @@ def getPDFKey(booklet,no):
 
     return filename
 
+def getCSVKey(booklets):
+		
+    mapper = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E"}
+
+    f = open("answers.csv", 'w')
+    try:
+        for num, booklet in enumerate(booklets):
+            f.write("Booklet " + mapper[num] + "\n\n")
+            for num, element in enumerate(booklet):
+                question = element[0]
+                _, answer = question.getLatex()
+                print("Answer: ", answer)
+                f.write(str(num+1) + "," + str(mapper[answer]) + "\n")
+
+    finally:
+        f.close()
+
 def exam_result(request):
     questions = []
     if request.method == "POST":
@@ -422,8 +440,7 @@ def exam_result(request):
             print(bookletNo)
             message = getPDFKey(booklets[bookletNo-1], bookletNo-1)
         if "csvkey" in request.POST:
-            print("CSV")
-            message = ""
+            message = getCSVKey(booklets)
     buffer = io.BytesIO()
     context = {"valid_questions":questions, "message":message}
     return render(request, "application/exam_result.html", context)

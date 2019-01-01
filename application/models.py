@@ -35,8 +35,7 @@ class Question(models.Model):
             output+=(r"""\choice """)
             choice_embed = choices[i].embed
             if choice_embed != None and choice_embed != []:
-                for embed in choice_embed:
-                    output+=(r"""\includegraphics[height=2em]{""" + str(embed.filename) + """}
+                output+=(r"""\includegraphics[height=2em]{""" + str(choice_embed.filename) + """}
 """)
             if choices[i].choicetext != "":
                 output+=(choices[i].choicetext)
@@ -76,8 +75,7 @@ class Question(models.Model):
                 output+=(r"""\choice """)
             choice_embed = choices[i].embed
             if choice_embed != None and choice_embed != []:
-                for embed in choice_embed:
-                    output+=(r"""\includegraphics[height=2em]{""" + str(embed.filename) + """}
+                output+=(r"""\includegraphics[height=2em]{""" + str(choice_embed.filename) + """}
 """)
             if choices[i].choicetext != "":
                 output+=(choices[i].choicetext)

@@ -14,12 +14,12 @@ class Question(models.Model):
     def getLatex(self, shuffled=False):
         output = """"""
         output += r"""\question """
-        output += (self.latexbody + """\newline
+        output += (self.latexbody + """\\newline
 """)
         embeds = Has_Embed.objects.filter(qid=self)
         if embeds != None and embeds != []:
             for embed in embeds:
-                output+=(r"""\includegraphics[height=3em]{""" + str(embed.filename) + """} \newline
+                output+=(r"""\includegraphics[height=3em]{""" + str(embed.filename) + """} \\newline
 """)
 
 
@@ -51,12 +51,12 @@ class Question(models.Model):
     def getLatexCorrect(self, shuffled=False):
         output = """"""
         output += r"""\question """
-        output += (self.latexbody + """\newline
+        output += (self.latexbody + """\\newline
 """)
         embeds = Has_Embed.objects.filter(qid=self)
         if embeds != None and embeds != []:
             for embed in embeds:
-                output+=(r"""\includegraphics[height=3em]{""" + str(embed.filename) + """} \newline
+                output+=(r"""\includegraphics[height=3em]{""" + str(embed.filename) + """} \\newline
 """)
 
 

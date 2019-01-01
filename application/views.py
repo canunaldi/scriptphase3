@@ -304,7 +304,7 @@ def getLatexExam(booklet):
     answers = []
     for element in booklet:
         question = element[0]
-        text, answer = question.getLatex()
+        text, answer = question.getLatex(shuffled=True)
         returnString+=text
         answers.append(answer)
 
@@ -328,7 +328,7 @@ def getLatexKey(booklet):
 
     for element in exam:
         question = element[0]
-        text = question.getLatexCorrect()
+        text = question.getLatexCorrect(shuffled=True)
         returnString += text
 
     returnString += r"""\end{questions}
@@ -429,21 +429,33 @@ def exam_result(request):
 
             message = "SHUFFLE"
         if "examlatex" in request.POST:
-            bookletNo = int(request.POST["getexamlatex"])
+            bookletNo = (request.POST["getexamlatex"])
+            bookletNo = bookletNo.split(",")
             print(bookletNo)
-            message = getLatexExam(booklets[bookletNo-1])
+            for bookleteach in bookletNo:
+                bookleteach = int(bookleteach)
+                message = getLatexExam(booklets[bookleteach-1])
         if "exampdf" in request.POST:
-            bookletNo = int(request.POST["getexampdf"])
+            bookletNo = (request.POST["getexampdf"])
+            bookletNo = bookletNo.split(",")
             print(bookletNo)
-            message = getPDFExam(booklets[bookletNo-1],bookletNo-1)
+            for bookleteach in bookletNo:
+                bookleteach = int(bookleteach)
+                message = getPDFExam(booklets[bookleteach-1],bookleteach-1)
         if "keylatex" in request.POST:
-            bookletNo = int(request.POST["getanswerlatex"])
+            bookletNo = (request.POST["getanswerlatex"])
+            bookletNo = bookletNo.split(",")
             print(bookletNo)
-            message = getLatexKey(booklets[bookletNo-1])
+            for bookleteach in bookletNo:
+                bookleteach = int(bookleteach)
+                message = getLatexKey(booklets[bookleteach-1])
         if "keypdf" in request.POST:
-            bookletNo = int(request.POST["getkeypdf"])
+            bookletNo = (request.POST["getkeypdf"])
+            bookletNo = bookletNo.split(",")
             print(bookletNo)
-            message = getPDFKey(booklets[bookletNo-1], bookletNo-1)
+            for bookleteach in bookletNo:
+                bookleteach = int(bookleteach)
+                message = getPDFKey(booklets[bookleteach-1], bookleteach-1)
         if "csvkey" in request.POST:
             message = getCSVKey(booklets)
     buffer = io.BytesIO()

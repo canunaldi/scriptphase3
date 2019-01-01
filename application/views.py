@@ -15,7 +15,12 @@ import io
         
 
 def index(request):
-    return render(request, 'application/index.html')
+    questions = Question.objects.all()
+    total = []
+    for question in questions:
+        total.append(question)
+    context = {"questions":total}
+    return render(request, 'application/index.html', context=context)
 
 def question_detail(request):
     print(request.POST)

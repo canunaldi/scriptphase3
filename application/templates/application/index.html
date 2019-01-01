@@ -32,6 +32,11 @@
             </div>
         </div>
     </div>
+    {% if questions %}
+        {% for question in questions %}
+            <h2>{{question.qid}}</h2> <h3>{{question.latexbody}}</h3>
+        {% endfor %}
+    {% endif %}
 </body>
 
 <script>

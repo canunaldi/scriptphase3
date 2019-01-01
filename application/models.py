@@ -1,4 +1,6 @@
 from django.db import models
+import threading
+from threading import *
 
 # Create your models here.
 
@@ -9,9 +11,11 @@ class Question(models.Model):
     qdate = models.DateField(null=True, blank= True)
     parent = models.IntegerField(null=True)
     difficulty = models.IntegerField()
+    Lock = Lock()
     def __int__(self):
         return self.qid
     def getLatex(self, shuffled=False):
+        self.Lock.acquire()
         output = """"""
         output += r"""\question """
         output += (self.latexbody + """\\newline
@@ -47,8 +51,10 @@ class Question(models.Model):
             if choices[i].flag == 1:
                 answer = i
                 break
+        self.Lock.release()
         return output, answer
     def getLatexCorrect(self, shuffled=False):
+        self.Lock.acquire()
         output = """"""
         output += r"""\question """
         output += (self.latexbody + """\\newline
@@ -83,7 +89,7 @@ class Question(models.Model):
 """)
         output+=(r"""\end{oneparchoices}
 """)
-
+        self.Lock.release()
         return output
 
 
@@ -100,7 +106,7 @@ class Embed(models.Model):
 
 class Choice(models.Model):
     choiceid = models.AutoField(primary_key=True)
-    choicetext = models.TextField(default="DefaultChoice")
+    choicetext = models.TextField(default="")
     flag = models.IntegerField()
     pos = models.TextField(null=True)
     qid = models.ForeignKey(Question, on_delete=models.CASCADE)

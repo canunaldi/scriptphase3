@@ -12,6 +12,9 @@ from django.core import serializers
 #from reportlab.pdfgen import canvas
 import io
 
+
+def addquestion(request):
+    return render(request, 'application/addquestion.html')
         
 
 def index(request):
@@ -70,22 +73,34 @@ def question_detail(request):
             question.qdate = askdate
             question.save()
         if 'choiceyes' in request.POST:
-            if request.POST['choiceid'] != '':
-                choiceid = request.POST['choiceid']
+            if request.POST.getlist('choiceid') != '':
+                choiceid = request.POST.getlist('choiceid')
                 print(choiceid)
-                updatechoice = Choice.objects.get(choiceid = choiceid)
-                if request.POST['choicetext'] != '':
-                    newtext = request.POST['choicetext']
-                    updatechoice.choicetext = newtext
-                    updatechoice.save()
-                if request.POST['choicecorrect'] != '': 
-                    newflag = request.POST['choicecorrect']
-                    updatechoice.flag = newflag
-                    updatechoice.save()
-                if request.POST['choicepos'] != '': 
-                    newpos = request.POST['choicepos']
-                    updatechoice.pos =newpos
-                    updatechoice.save()
+               
+                index = 0
+                print('Buraya bascaz')
+                print((request.POST))
+                print('===================')
+                if request.POST.getlist('choicetext') != '':
+                    for choice in request.POST.getlist('choicetext'):
+                        print("############")
+                        print(choice)
+                        if choice != "":
+                            choiceideach = choiceid[index]
+                            updatechoice = Choice.objects.get(choiceid = choiceideach)
+                            newtext = request.POST.getlist('choicetext')[index]
+                            updatechoice.choicetext = newtext
+                            updatechoice.save()
+                            if request.POST.getlist('choicecorrect') != '': 
+                                newflag = request.POST.getlist('choicecorrect')[index]
+                                updatechoice.flag = newflag
+                                updatechoice.save()
+                            if request.POST.getlist('choicepos') != '': 
+                                newpos = request.POST.getlist('choicepos')[index]
+                                updatechoice.pos =newpos
+                                updatechoice.save()
+                        index +=1
+                    
 
         if 'deleteyes' in request.POST:
             Question.objects.filter(qid=qid).delete()

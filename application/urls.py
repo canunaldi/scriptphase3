@@ -9,5 +9,6 @@ urlpatterns = [
     path('question/', views.question, name='question'),
     path('qbank/', views.qbank, name='qbank'),
     path('exam/', views.exam, name='exam'),
-    path('exam_result', views.exam_result, name='exam_result')
+    path('exam_result/', views.exam_result, name='exam_result'),
+    path('addquestion/', views.addquestion, name='addquestion')
 ]

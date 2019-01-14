@@ -9,12 +9,21 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
+    <style>
+        .mytable{
+            border: 1px solid black;
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
+                    <h1>ADD NEW QUESTION</h1>
+                    <button onclick="addquestion()">ADD QUESTION</button>
+                </div>
+            <div class="col-3">
                 <h1>QUESTION</h1>
                 <form action="{% url 'question' %}" method="POST">
                         {% csrf_token %}
@@ -22,25 +31,51 @@
                     <input type="submit">
                 </form>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <h1>QBANK</h1>
                 <button onclick="qbank()">Qbank</button>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <h1>EXAM</h1>
                 <button onclick="exam()">Exam</button>
             </div>
         </div>
     </div>
+    <br><br><br>    
     {% if questions %}
+        <div class="container">
+
+        
         {% for question in questions %}
-            <h2>{{question.qid}}</h2> <h3>{{question.latexbody}}</h3>
+            <table class="mytable">
+                <tr>
+                    <th style="border-right: 1px solid black; width: 7%;">
+                        <h2>{{question.qid}}</h2>
+                    </th>
+                    <th>
+                        <h3>{{question.latexbody}}</h3>
+                    </th>
+                    <th style="text-align:right; border-left: 1px solid black; width: 7%;">
+                        <button onclick="question({{question.qid}})">
+                            Change
+                        </button>
+                    </th>
+                </tr>
+            </table>
+             
         {% endfor %}
+        </div>
     {% endif %}
+        
 </body>
 
 <script>
-
+    function addquestion(){
+        window.location = "/application/addquestion"
+    }
+    function question(questionid){
+        console.log(questionid)
+    }
     function qbank(){
         window.location = "/application/qbank"
     }

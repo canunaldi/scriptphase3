@@ -34,11 +34,16 @@
         <label>DELETE EMBED</label><input type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
         <label>UPDATE PARENT</label><input type="text" name="updateParent" placeholder="Enter New Parent"/><br><br>
         <label>UPDATE ASK DATE</label><input type="text" name="updateAskDate" placeholder="Enter New Date"/><br><br>
+        {% if choices %}
         <label>UPDATE CHOICE</label> <label>Yes</label><input type="radio" name="choiceyes"/> <label>No</label><input type="radio" name="choiceno"/><br><br>
-        <input type="text" name="choiceid" placeholder="Enter the ChoiceID"/>
+        
+        {% for choice in choices %}
+        <input type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
         <input type="text" name="choicetext" placeholder="Enter New Text"/>
         <input type="text" name="choicecorrect" placeholder="Enter Correct/Not(1/0)"/>
         <input type="text" name="choicepos" placeholder="Enter New Pos"/><br><br>
+        {% endfor %}
+        {% endif %}
         <label>DELETE THIS QUESTION</label> <label>Yes</label><input type="radio" name="deleteyes"/> <label>No</label><input type="radio" name="deleteno"/><br><br>
         <input type="submit">
     </form>

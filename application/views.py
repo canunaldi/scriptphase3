@@ -453,8 +453,7 @@ def exam_result(request):
                 message = getLatexExam(booklets[bookleteach-1])
                 with open(pdfpath+ "booklet" + str(bookletNo) + ".tex", "w") as f:
                     f.write(message[0])
-                response = FileResponse(open(pdfpath+"booklet"+str(bookletNo)+".tex"), )
-
+                response = FileResponse(open(pdfpath+"booklet"+str(bookletNo)+".tex"))
                 return response
         if "exampdf" in request.POST:
             bookletNo = (request.POST["getexampdf"])

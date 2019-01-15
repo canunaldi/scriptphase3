@@ -311,11 +311,11 @@ def getPDFExam(booklet,no):
     proc = subprocess.Popen(cmd)
     proc.communicate()
 
-    filename = "booklet" + str(no) + ".tex"
+    filename = "booklet" + str(no) + ".pdf"
 
     return filename
 
-def getLatexExam(booklet):
+def getLatexExam(booklet)
     returnString = """\\documentclass{exam}""" + """\n""" + """\\usepackage{graphicx}""" + """\n"""  + """ \n""" + """\\begin{document}"""\
     + """\n""" + """\\begin{questions}""" + """\n"""
 
@@ -367,7 +367,7 @@ def getPDFKey(booklet,no):
     proc = subprocess.Popen(cmd)
     proc.communicate()
 
-    filename = "answerkey" + str(no) + ".tex"
+    filename = "answerkey" + str(no) + ".pdf"
 
     return filename
 
@@ -518,10 +518,7 @@ def exam_result(request):
             print(bookletNo)
             for bookleteach in bookletNo:
                 bookleteach = int(bookleteach)
-                message = getPDFKey(booklets[bookleteach-1], bookleteach-1)
-                with open(pdfpath+ "booklet" + str(bookleteach) + ".pdf", "w") as f:
-                    f.write(str(message[0]))
-                response = str("booklet"+str(bookleteach)+".pdf")
+                response = getPDFKey(booklets[bookleteach-1], bookleteach-1)
                 responseList.append(response)
             if len(bookletNo) == 1:
                 response = FileResponse(open(pdfpath + response, 'rb'), filename = response, as_attachment = True)

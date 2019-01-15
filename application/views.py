@@ -124,14 +124,18 @@ def question(request):
         if request.POST['question'] != '':
             qid = request.POST['question']
             try:
+                print("HEYYY")
                 question = Question.objects.get(qid = qid)
                 question_latex = """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n\\begin{questions}\n"""
 
-                question_latex += question.getLatex()
+                question_latex += (question.getLatex())[0]
                 question_latex += (r"""\end{questions}
 \end{document}""")
-            except error:
-                pass
+                print("=======================================")
+                print(question_latex)
+                print("=======================================")
+            except Exception as e:
+                print(e)
             try:
                 embeds = Has_Embed.objects.filter(qid = question)
                 for embed in embeds:
@@ -154,8 +158,8 @@ def question(request):
     question_pdf = None
     if question_latex != "":
         with open("current_question.tex", "w") as f:
-            f.write(question_latex[0])
-        cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "temp/pdf", "current_question.tex"]
+            f.write(question_latex)
+        cmd = ["pdflatex", "-interaction", "nonstopmode", "current_question.tex"]
         proc = subprocess.Popen(cmd)
         proc.communicate()
         question_pdf = "current_question.pdf"
@@ -169,7 +173,7 @@ def question(request):
     #serialized_obj = serializers.serialize('json',  list([output]) )
 
     
-    context = {'question': question, 'embeds': result_embed, 'choices': result_choice, 'topics':result_topic, 'getter_q':output, 'questionpdf':question_pdf}
+    context = {'question': question, 'embeds': result_embed, 'choices': result_choice, 'topics':result_topic, 'getter_q':output, 'question_pdf':question_pdf}
     return render(request, 'application/question.html', context)
 
             

@@ -475,10 +475,7 @@ def exam_result(request):
             print(bookletNo)
             for bookleteach in bookletNo:
                 bookleteach = int(bookleteach)
-                message = getPDFExam(booklets[bookleteach-1],bookleteach-1)
-                with open(pdfpath+ "booklet" + str(bookleteach) + ".pdf", "w") as f:
-                    f.write(str(message[0]))
-                response = str("booklet"+str(bookleteach)+".pdf")
+                response = getPDFExam(booklets[bookleteach-1],bookleteach-1)
                 responseList.append(response)
             if len(bookletNo) == 1:
                 response = FileResponse(open(pdfpath + response, 'rb'), filename = response, as_attachment = True)

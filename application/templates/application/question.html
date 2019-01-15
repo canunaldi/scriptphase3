@@ -45,21 +45,21 @@
                 <form action="{% url 'question_detail' %}" method="POST">
                     {% csrf_token %}
                     <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
-                    <label>UPDATE BODY</label><input type="text" name="updatebody" placeholder="Enter New Body"/><br><br>
-                    <label>ADD TOPIC</label><input type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
-                    <label>DELETE TOPIC</label><input type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
-                    <label>ADD EMBED</label><input type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
-                    <label>DELETE EMBED</label><input type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
-                    <label>UPDATE PARENT</label><input type="text" name="updateParent" placeholder="Enter New Parent"/><br><br>
-                    <label>UPDATE ASK DATE</label><input type="text" name="updateAskDate" placeholder="Enter New Date"/><br><br>
+                    <label>UPDATE BODY</label><input onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
+                    <label>ADD TOPIC</label><input onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
+                    <label>DELETE TOPIC</label><input onchange="change()" type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
+                    <label>ADD EMBED</label><input onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
+                    <label>DELETE EMBED</label><input onchange="change()" type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
+                    <label>UPDATE PARENT</label><input onchange="change()" type="text" name="updateParent" value="{{question.parent}}" placeholder="Enter New Parent"/><br><br>
+                    <label>UPDATE ASK DATE</label><input onchange="change()" type="text" name="updateAskDate" value="{{question.date}}" placeholder="Enter New Date"/><br><br>
                     {% if choices %}
                     <label>UPDATE CHOICE</label> <label>Yes</label><input type="radio" name="choiceyes"/> <label>No</label><input type="radio" name="choiceno"/><br><br>
                     
                     {% for choice in choices %}
-                    <input type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
-                    <input type="text" name="choicetext" placeholder="Enter New Text"/>
-                    <input type="text" name="choicecorrect" placeholder="Enter Correct/Not(1/0)"/>
-                    <input type="text" name="choicepos" placeholder="Enter New Pos"/><br><br>
+                    <input onchange="change()" type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
+                    <input onchange="change()" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter New Text"/>
+                    <input onchange="change()" type="text" name="choicecorrect" value="{{choice.choicecorrect}}" placeholder="Enter Correct/Not(1/0)"/>
+                    <input onchange="change()" type="text" name="choicepos" value="{{choice.choicepos}}" placeholder="Enter New Pos"/><br><br>
                     {% endfor %}
                     {% endif %}
                     <label>DELETE THIS QUESTION</label> <label>Yes</label><input type="radio" name="deleteyes"/> <label>No</label><input type="radio" name="deleteno"/><br><br>
@@ -101,14 +101,11 @@
 
     }
 
-    var pdf = new PDFObject({
-  url: "https://something.com/HTC_One_XL_User_Guide.pdf",
-  id: "pdfRendered",
-  pdfOpenParams: {
-    view: "FitH"
-  }
-}).embed("pdfRenderer");
-console.log
+    function change(){
+        $.get('/index/', {user: response.name, page: page}, function(json_response) {
+        console.log(json_response.user.some_property);
+});
+    }
 
 
 </script>

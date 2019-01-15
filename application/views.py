@@ -118,12 +118,14 @@ def question(request):
     result_embed = []
     result_choice = []
     result_topic = []
+    question_latex = ""
     if request.method == 'POST':
         print(request.POST['question'])
         if request.POST['question'] != '':
             qid = request.POST['question']
             try:
                 question = Question.objects.get(qid = qid)
+                question_latex = question.getLatex()
             except error:
                 pass
             try:
@@ -145,7 +147,14 @@ def question(request):
                     result_topic.append(topic)
             except:
                 pass
-            
+    question_pdf = None
+    if question_latex != "":
+        with open("current_question.tex", "w") as f:
+            f.write(question_latex[0])
+        cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "temp/pdf", "current_question.tex"]
+        proc = subprocess.Popen(cmd)
+        proc.communicate()
+        question_pdf = "current_question.pdf"
                 
     print(question)
     print(result_embed)
@@ -156,7 +165,7 @@ def question(request):
     #serialized_obj = serializers.serialize('json',  list([output]) )
 
     
-    context = {'question': question, 'embeds': result_embed, 'choices': result_choice, 'topics':result_topic, 'getter_q':output}
+    context = {'question': question, 'embeds': result_embed, 'choices': result_choice, 'topics':result_topic, 'getter_q':output, 'questionpdf':question_pdf}
     return render(request, 'application/question.html', context)
 
             

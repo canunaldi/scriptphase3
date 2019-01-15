@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 
 from . import views
 
@@ -12,5 +13,5 @@ urlpatterns = [
     path('exam_result/', views.exam_result, name='exam_result'),
     path('addquestion/', views.addquestion, name='addquestion'),
     path('question/current_question.pdf', views.qpdf, name='qpdf'),
-    path('ajax/pdfcreate', views.pdfcreate, name='pdfcreate'),
+    url(r'^ajax/pdfcreate$', views.pdfcreate, name='pdfcreate'),
 ] 

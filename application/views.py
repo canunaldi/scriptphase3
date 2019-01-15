@@ -110,7 +110,7 @@ def question_detail(request):
     return render(request, 'application/question_done.html')
 
 def pdfcreate(request):
-    latex = request.GET.get('question_latex', None)
+    latex = request.GET.get('latex', None)
     print(latex)
 
 def qpdf(request):

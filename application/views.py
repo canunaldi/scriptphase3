@@ -109,6 +109,10 @@ def question_detail(request):
             Question.objects.filter(qid=qid).delete()
     return render(request, 'application/question_done.html')
 
+def pdfcreate(request):
+    latex = request.GET.get('question_latex', None)
+    print(latex)
+
 def qpdf(request):
     return render(request,'application/current_question.html')
 

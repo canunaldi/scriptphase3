@@ -45,7 +45,7 @@
                 <form action="{% url 'question_detail' %}" method="POST">
                     {% csrf_token %}
                     <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
-                    <label>UPDATE BODY</label><input onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
+                    <label>UPDATE BODY</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
                     <label>ADD TOPIC</label><input onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
                     <label>DELETE TOPIC</label><input onchange="change()" type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
                     <label>ADD EMBED</label><input onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
@@ -102,10 +102,19 @@
     }
 
     function change(){
-        $.get('/index/', {user: response.name, page: page}, function(json_response) {
-        console.log(json_response.user.some_property);
-});
+        $.ajax({
+        url: '/ajax/pdfcreate/',
+        data: {
+          'latex': $("#question_latex")
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data)
+        }
+      });
+        
     }
+});
 
 
 </script>

@@ -356,6 +356,7 @@ def getLatexKey(booklet):
 
 def getPDFKey(booklet,no):
     key = getLatexKey(booklet)
+    no +=1
 
     with open("answerkey" + str(no) + ".tex", 'w') as f:
         f.write(key)

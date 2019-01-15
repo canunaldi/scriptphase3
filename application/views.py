@@ -5,15 +5,16 @@ import subprocess
 import random
 # Create your views here.
 
-
+import os
 from django.http import HttpResponse, FileResponse
 from .forms import NameForm
 from django.core import serializers
+import zipfile
 #from reportlab.pdfgen import canvas
 import io
 
 
-pdfpath = "temp/pdf"
+pdfpath = "temp/pdf/"
 
 def addquestion(request):
     return render(request, 'application/addquestion.html')
@@ -448,13 +449,27 @@ def exam_result(request):
             bookletNo = (request.POST["getexamlatex"])
             bookletNo = bookletNo.split(",")
             print(bookletNo)
+            responseList = []
             for bookleteach in bookletNo:
                 bookleteach = int(bookleteach)
                 message = getLatexExam(booklets[bookleteach-1])
-                with open(pdfpath+ "booklet" + str(bookletNo) + ".tex", "w") as f:
-                    f.write(message[0])
-                response = FileResponse(open(pdfpath+"booklet"+str(bookletNo)+".tex"))
-                return response
+                print("WRITING MESSAGE")
+                print(message[0])
+                print("FILE NAME: ", bookleteach)
+                print("########################")
+                with open(pdfpath+ "booklet" + str(bookleteach) + ".tex", "w") as f:
+                    f.write(str(message[0]))
+                print(pdfpath+"booklet"+str(bookleteach)+".tex")
+                response = str("booklet"+str(bookleteach)+".tex")
+                responseList.append(response)
+                print(pdfpath+"booklet"+str(bookleteach)+".tex")
+            zip_name = zipfile.ZipFile(pdfpath + "booklets.zip", 'w')
+            absolute_path = pdfpath
+            for response in responseList:
+                get_file = os.path.join(absolute_path, response)
+                zip_name.write(get_file, response)
+            print(zip_name)
+            return FileResponse((zip_name.filename, "rb"), content_type='application/zip', filename = "booklets.zip", as_attachment = True)
         if "exampdf" in request.POST:
             bookletNo = (request.POST["getexampdf"])
             bookletNo = bookletNo.split(",")

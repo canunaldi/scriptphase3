@@ -1,0 +1,11 @@
+{% if valid_questions %}
+    {% for question in valid_questions %}
+        <h1>{{question.latexbody}}</h1>
+        <h4>Parent = {{question.parent}}</h4>
+        <h4>Date = {{question.qdate}}</h4>
+    {% endfor %}
+{% elif answer %}
+    <h3>{{answer}}</h3>
+{% else %}
+    <h1>No Matching Question Found</h1>
+{% endif %}

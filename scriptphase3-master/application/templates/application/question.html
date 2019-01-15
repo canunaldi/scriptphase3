@@ -1,0 +1,71 @@
+
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+{% if question %}
+    <h1>{{question.latexbody}}</h1>
+    <h4>Parent = {{question.parent}}</h4>
+    <h4>Date = {{question.qdate}}</h4>
+    {% if embeds %}
+        {% for embed in embeds %}
+            <h3>{{embed.filename}}</h3>
+        {% endfor %}
+    {% endif %}
+    {% if choices %}
+        {% for choice in choices %}
+        <h3>
+            <a>{{choice.choiceid}} </a><a>{{choice.choicetext}} </a><a>{{choice.flag}} </a><a>{{choice.pos}} </a>
+        </h3>
+
+        {% endfor %}
+    {% endif %}
+    {% if topics %}
+        {% for topic in topics %}
+            <h3>{{topic.topicname}}</h3>
+        {% endfor %}
+    {% endif %}
+    <form action="{% url 'question_detail' %}" method="POST">
+        {% csrf_token %}
+        <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
+        <label>UPDATE BODY</label><input type="text" name="updatebody" placeholder="Enter New Body"/><br><br>
+        <label>ADD TOPIC</label><input type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
+        <label>DELETE TOPIC</label><input type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
+        <label>ADD EMBED</label><input type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
+        <label>DELETE EMBED</label><input type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
+        <label>UPDATE PARENT</label><input type="text" name="updateParent" placeholder="Enter New Parent"/><br><br>
+        <label>UPDATE ASK DATE</label><input type="text" name="updateAskDate" placeholder="Enter New Date"/><br><br>
+        {% if choices %}
+        <label>UPDATE CHOICE</label> <label>Yes</label><input type="radio" name="choiceyes"/> <label>No</label><input type="radio" name="choiceno"/><br><br>
+        
+        {% for choice in choices %}
+        <input type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
+        <input type="text" name="choicetext" placeholder="Enter New Text"/>
+        <input type="text" name="choicecorrect" placeholder="Enter Correct/Not(1/0)"/>
+        <input type="text" name="choicepos" placeholder="Enter New Pos"/><br><br>
+        {% endfor %}
+        {% endif %}
+        <label>DELETE THIS QUESTION</label> <label>Yes</label><input type="radio" name="deleteyes"/> <label>No</label><input type="radio" name="deleteno"/><br><br>
+        <input type="submit">
+    </form>
+    <h3>GETTERS</h3>
+    <button onclick="getID()">Deneme</button>
+    <button onclick="getLatex()">getLatex</button>
+    <p style="width: 40%; height: 50px;" id="label"></p>
+
+{% else %}
+    <h1>FAIL</h1>
+{% endif %}
+
+<script>
+    function getID(){
+        var q2 = document.getElementById("question_id")
+        document.getElementById("label").innerHTML = q2.value.substring(0,q2.value.length-1)
+
+    }
+    function getLatex(){
+        var latex = "{{getter_q|escapejs}}"
+        document.getElementById("label").innerHTML = latex
+
+    }
+
+</script>

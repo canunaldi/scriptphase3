@@ -72,9 +72,13 @@
             </div>
             <div class="col-6">
                 {% if question_pdf %}
-                    <h1>PATATES</h1>
-                    <embed src= "{{question_pdf}}" width="500" height="375" 
-                    type='application/pdf'>
+                        <div class="container">
+                            {% load static %}
+                            <embed src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
+                        </div>
+                        <div id="pdfRendered">
+
+                        </div>
                 {% endif %}
             </div>
         </div>
@@ -97,6 +101,17 @@
 
     }
 
+    var pdf = new PDFObject({
+  url: "https://something.com/HTC_One_XL_User_Guide.pdf",
+  id: "pdfRendered",
+  pdfOpenParams: {
+    view: "FitH"
+  }
+}).embed("pdfRenderer");
+console.log
+
+
 </script>
+
 
 </body>

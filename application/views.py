@@ -108,7 +108,9 @@ def question_detail(request):
         if 'deleteyes' in request.POST:
             Question.objects.filter(qid=qid).delete()
     return render(request, 'application/question_done.html')
-    
+
+def qpdf(request):
+    return render(request,'application/current_question.html')
 
 def question(request):
     question = []
@@ -159,7 +161,7 @@ def question(request):
     if question_latex != "":
         with open("current_question.tex", "w") as f:
             f.write(question_latex)
-        cmd = ["pdflatex", "-interaction", "nonstopmode", "current_question.tex"]
+        cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "application/static", "current_question.tex"]
         proc = subprocess.Popen(cmd)
         proc.communicate()
         question_pdf = "current_question.pdf"

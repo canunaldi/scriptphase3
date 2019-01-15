@@ -13,6 +13,8 @@ from django.core import serializers
 import io
 
 
+pdfpath = "temp/pdf"
+
 def addquestion(request):
     return render(request, 'application/addquestion.html')
         
@@ -449,6 +451,10 @@ def exam_result(request):
             for bookleteach in bookletNo:
                 bookleteach = int(bookleteach)
                 message = getLatexExam(booklets[bookleteach-1])
+                with open(pdfpath+ "booklet" + str(bookletNo) + ".tex", "w") as f:
+                    f.write(message)
+                response = FileResponse(open(pdfpath+"booklet"+str(bookletNo)+".tex"))
+                return response
         if "exampdf" in request.POST:
             bookletNo = (request.POST["getexampdf"])
             bookletNo = bookletNo.split(",")

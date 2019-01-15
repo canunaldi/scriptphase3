@@ -315,7 +315,7 @@ def getPDFExam(booklet,no):
 
     return filename
 
-def getLatexExam(booklet)
+def getLatexExam(booklet):
     returnString = """\\documentclass{exam}""" + """\n""" + """\\usepackage{graphicx}""" + """\n"""  + """ \n""" + """\\begin{document}"""\
     + """\n""" + """\\begin{questions}""" + """\n"""
 

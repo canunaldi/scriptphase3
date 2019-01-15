@@ -92,6 +92,7 @@ class Question(models.Model):
         self.Lock.release()
         return output
 
+#    def makePDF(shuffled=False):
 
 
 

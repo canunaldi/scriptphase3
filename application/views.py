@@ -303,8 +303,7 @@ def getPDFExam(booklet,no):
     with open("booklet" + str(no) + ".tex", 'w') as f:
         f.write(exam)
 
-    cmd = ['pdflatex', '-interaction', 'nonstopmode', "booklet" + str(no) + ".tex"]
-
+    cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "temp/pdf", "booklet" + str(no) + ".tex"]
     proc = subprocess.Popen(cmd)
     proc.communicate()
 

@@ -125,7 +125,11 @@ def question(request):
             qid = request.POST['question']
             try:
                 question = Question.objects.get(qid = qid)
-                question_latex = question.getLatex()
+                question_latex = """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n\\begin{questions}\n"""
+
+                question_latex += question.getLatex()
+                question_latex += (r"""\end{questions}
+\end{document}""")
             except error:
                 pass
             try:

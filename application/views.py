@@ -302,6 +302,7 @@ def qbank(request):
 def getPDFExam(booklet,no):
 		
     exam, _ = getLatexExam(booklet)
+    no +=1
 
     with open("booklet" + str(no) + ".tex", 'w') as f:
         f.write(exam)

@@ -17,19 +17,17 @@
     </style>
 </head>
 <body>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-4">
-                    <h1>ADD NEW QUESTION</h1>
-                    <button onclick="addquestion()">ADD QUESTION</button>
+                    <button type="button" class="btn btn-lg btn-primary" onclick="addquestion()">ADD QUESTION</button>
                 </div>
             <div class="col-4">
-                <h1>QBANK</h1>
-                <button onclick="qbank()">Qbank</button>
+                <button type="button" class="btn btn-lg btn-primary"  onclick="qbank()">Qbank</button>
             </div>
             <div class="col-4">
-                <h1>EXAM</h1>
-                <button onclick="exam()">Exam</button>
+                <button type="button" class="btn btn-lg btn-primary"  onclick="exam()">Exam</button>
             </div>
         </div>
     </div>
@@ -48,7 +46,7 @@
                         <h3>{{question.latexbody}}</h3>
                     </th>
                     <th style="text-align:right; border-left: 1px solid black; width: 7%;">
-                        <button onclick="question({{question.qid}})">
+                        <button type="button" class="btn btn-success"  onclick="question({{question.qid}})">
                             Change
                         </button>
                     </th>

@@ -117,10 +117,14 @@ def pdfcreatefornew(request):
     embeds = [newembed]
     shuffled = True
     current_question = Question(qid=999, latexbody = latex, qdate = date, parent = parent)
-    choice1 = Choice(choiceid = 1000, choicetext = choice1text, flag = choice1correct, pos = choice1pos, qid=current_question, embed= choiceembed1)
-    choice2 = Choice(choiceid = 1001, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= choiceembed2)
-    choice3 = Choice(choiceid = 1002, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= choiceembed3)
-    choice4 = Choice(choiceid = 1003, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= choiceembed4)
+    choice1embed = Embed(filename=choiceembed1)
+    choice2embed = Embed(filename=choiceembed2)
+    choice3embed = Embed(filename=choiceembed3)
+    choice4embed = Embed(filename=choiceembed4)
+    choice1 = Choice(choiceid = 1000, choicetext = choice1text, flag = choice1correct, pos = choice1pos, qid=current_question, embed= choice1embed)
+    choice2 = Choice(choiceid = 1001, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= choice2embed)
+    choice3 = Choice(choiceid = 1002, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= choice3embed)
+    choice4 = Choice(choiceid = 1003, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= choice4embed)
     choices = [choice1, choice2, choice3, choice4]
     output = """"""
     output += r"""\question """

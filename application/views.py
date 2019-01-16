@@ -75,10 +75,10 @@ def pdfcreatefornew(request):
     embeds = [newembed]
     shuffled = True
     current_question = Question(qid=999, latexbody = latex, qdate = date, parent = parent)
-    choice1 = Choice(choiceid = 1000, choicetext = choice1text, flag = choice1correct, pos = choice1pos, qid=current_question, embed= currentembed1)
-    choice2 = Choice(choiceid = 1001, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= currentembed2)
-    choice3 = Choice(choiceid = 1002, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= currentembed3)
-    choice4 = Choice(choiceid = 1003, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= currentembed4)
+    choice1 = Choice(choiceid = 1000, choicetext = choice1text, flag = choice1correct, pos = choice1pos, qid=current_question, embed= choiceembed1)
+    choice2 = Choice(choiceid = 1001, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= choiceembed2)
+    choice3 = Choice(choiceid = 1002, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= choiceembed3)
+    choice4 = Choice(choiceid = 1003, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= choiceembed4)
     choices = [choice1, choice2, choice3, choice4]
     output = """"""
     output += r"""\question """

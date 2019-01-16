@@ -146,6 +146,7 @@
         dataType: 'json',
         success: function (data) {
             var embed = "<embed id=" + '"newpdf"' + "src = " +'"/static/current_question.pdf"'+ " width=" + '"500px"' + " height=" + '"500px"' + "/>"
+            console.log(embed)
             var pdf =  $('#pdfrendered');
             var embedelement = $(embed);
             console.log(pdf);

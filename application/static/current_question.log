@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 JAN 2019 17:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 JAN 2019 18:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -208,92 +208,37 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 
-! LaTeX Error: File `' not found.
+! LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.6 \includegraphics[height=3em]{}
-                                   \newline
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
+l.5 \end{questions}
+                   
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: File `' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.8 \choice \includegraphics[height=2em]{}
-                                          
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: File `' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.10 \choice \includegraphics[height=2em]{}
-                                           
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-<216.jpg, id=1, 211.79124pt x 211.79124pt>
-File: 216.jpg Graphic file (type jpg)
- <use 216.jpg>
-Package pdftex.def Info: 216.jpg used on input line 12.
-(pdftex.def)             Requested size: 19.99757pt x 20.00003pt.
-
-
-! LaTeX Error: File `' not found.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.13 \choice \includegraphics[height=2em]{}
-                                           
-I could not locate the file with any of these extensions:
-.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPEG,.JBIG2,.JB2,.eps
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--16
-
- []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./216.jpg>]
-This exam contains 1 questions with 0 parts, 0 subparts, and 0 subsubparts.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+This exam contains 0 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (application/static/current_question.aux) ) 
 Here is how much of TeX's memory you used:
- 2459 strings out of 494910
- 34183 string characters out of 6179835
- 100191 words of memory out of 5000000
- 5751 multiletter control sequences out of 15000+600000
+ 2431 strings out of 494910
+ 33911 string characters out of 6179835
+ 99159 words of memory out of 5000000
+ 5737 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 37i,9n,23p,244b,240s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,9n,23p,244b,162s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmr10.pfb>
-Output written on application/static/current_question.pdf (1 page, 25384 bytes)
+Output written on application/static/current_question.pdf (1 page, 11048 bytes)
 .
 PDF statistics:
- 13 PDF objects out of 1000 (max. 8388607)
+ 12 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

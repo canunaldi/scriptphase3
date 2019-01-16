@@ -20,18 +20,76 @@ pdfpath = "temp/pdf/"
 
 
 def add_question_detail(request):
-    print("==========ADD QUESTION STARTED==========")
+    body = ""
+    topics = []
+    embeds = []
+    date = None
+    parent = None
+    choices = []
+    difficulty=None
     if request.method == 'POST':
         body = request.POST['addbody']
-        print(body)
+
         if request.POST.getlist('addtopic') != []:
-            topic = request.POST['addtopic']
-            print(topic)
-        if request.POST.getlist('addEmbed') != []:
-            embed = request.POST['addEmbed']
-            print(embed)
+            topics = request.POST['addtopic'].split(',')
+
+        if request.POST['addEmbed'] != []:
+            embedList = request.POST['addEmbed'].split(',')
+
+        if request.POST['addDiff'] != []:
+            difficulty = request.POST['addDiff']
+
+
+        if request.POST['addAskDate'] != '':
+            date = request.POST['addAskDate']
+
+        if request.POST['addParent'] != '':
+            parent = request.POST['addParent']
+        choiceTest = []
+        for text, correct, pos, embed in zip(request.POST.getlist('choicetext'),request.POST.getlist('choicecorrect'),request.POST.getlist('choicepos'),request.POST.getlist('choiceembed')):
+            print(text, correct, pos, embed)
+            choiceTest.append([text, correct, pos, embed])
+            try:
+                embedObj = Embed.objects.get(filename=embed)
+            except:
+                embedObj = Embed(filename=embed)
+                embedObj.save()
+
+            choices.append([text, correct, pos, embedObj])
+
+        newQuestion = Question(latexbody=body, qdate=date, parent=parent, difficulty=difficulty)
+        newQuestion.save()
+        for topic in topics:
+            try:
+                newt = Topic.objects.get(topicname=topic)
+            except:
+                newt = Topic(topicname=topic)
+                newt.save()
+
+            belonging = BelongsTo(qid=newQuestion, topicname = newt)
+            belonging.save()
+
+        for embed in embedList:
+            try:
+                tmp = Embed.object.get(filename=embed)                    
+            except:
+                tmp = Embed(filename=embed)
+                tmp.save()
+            hasEmbed = Has_Embed(qid=newQuestion, filename=tmp)
+            hasEmbed.save()
+        
+        for choice in choices:
+            try:
+                newChoice = Choice.objects.get(choicetext=choice[0], flag=choice[1], pos=choice[2], embed=choice[3], qid=newQuestion)
+            except:
+                newChoice = Choice(choicetext=choice[0], flag=choice[1], pos=choice[2], embed=choice[3], qid=newQuestion)
+                newChoice.save()
     else:
         print("olmadii")
+
+
+    return render(request, 'application/question_added.html')
+
 def pdfcreatefornew(request):
     latex = request.GET.get('latex', None)
     print(latex)

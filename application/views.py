@@ -185,12 +185,13 @@ def pdfcreate(request):
     for embed in allembeds:
         embeds.append(embed)
     if addembed != '':
-        isthereany = Embed.objects.get(filename=addembed)
-        if isthereany == None:
+        try:
+            isthereany = Embed.objects.get(filename=addembed)
+            embeds.append(isthereany)
+        except Exception as e:
             newEmbed = Embed(filename=addembed)
             embeds.append(newEmbed)
-        else:
-            embeds.append(isthereany)
+
     topics = BelongsTo.objects.filter(qid=current_question)
     current_question.latexbody = latex
     current_question.parent = parent

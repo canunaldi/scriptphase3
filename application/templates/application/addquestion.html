@@ -24,8 +24,6 @@
                     <tr>
                         <h1>Add New Question</h1>
                         <form action="{% url 'question_detail' %}" method="POST">
-                                {% csrf_token %}
-                                <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
                                 <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
                                 <h4>Choice 1</h4>
                                 <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>

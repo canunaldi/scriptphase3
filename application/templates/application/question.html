@@ -148,10 +148,10 @@
             var pdf =  document.getElementById("pdfRendered");
             var embedelement = $('embed')
             var pdfelement = $('pdf')
-            console.log(pdfelement)
+            console.log(pdf)
             console.log(embedelement) 
-            pdfelement.removeChild(pdfelement.childNodes[0]);
-            pdfelement.append(embedelement);
+            pdf.removeChild(pdf.childNodes[0]);
+            pdf.append(embedelement);
         }
       });
         

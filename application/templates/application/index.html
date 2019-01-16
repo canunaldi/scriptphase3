@@ -34,7 +34,6 @@
     <br><br><br>
 
     <div class="container">
-        <h1>QBANK FUNCTIONALITIES LISTED BELOW</h1>
         <form action="{% url 'qbank_detail' %}" method="POST">
             {% csrf_token %}
             <label>Search By Topic </label><input type="radio" name="topic"/> <input type="text" name="topicsearch" placeholder="Enter Topic to Search"/><br><br>

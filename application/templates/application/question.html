@@ -144,7 +144,7 @@
         },
         dataType: 'json',
         success: function (data) {
-            var embed = "<embed id=" + '"newpdf"' + "src = " +'{% static ' + "current_question.pdf" + ' %}'+ "width=" + '500px' + " height=" + '500px' + "/>"
+            var embed = "<embed id=" + '"newpdf"' + "src = " +'localhost:8000/application/static/current_question.pdf'+ "width=" + '500px' + " height=" + '500px' + "/>"
             var pdf =  document.getElementById("pdfRendered"); 
             pdf.removeChild(pdf.childNodes[0]);
             pdf.append(embed);

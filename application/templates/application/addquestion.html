@@ -26,23 +26,28 @@
                     <tr>
                         <h1>Add New Question</h1>
                         <form action="{% url 'add_question_detail' %}" method="POST">
-                                <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="updatebody"  placeholder="Enter New Body"/><br><br>
+                                {% csrf_token %}
+                                <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="addbody"  placeholder="Enter New Body"/><br><br>
                                 <h4>Choice 1</h4>
                                 <input onchange="change()" id="choicetext1" type="text" name="choicetext"  placeholder="Enter choice text"/>
                                 <input onchange="change()" id="choicecorrect1" type="text" name="choicecorrect"  placeholder="Enter answer"/>
                                 <input onchange="change()" id="choicepos1" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choiceembed1" type="text" name="choiceembed"  placeholder="Enter embed"/><br><br>
                                 <h4>Choice 2</h4>
                                 <input onchange="change()" id="choicetext2" type="text" name="choicetext"  placeholder="Enter choice text"/>
                                 <input onchange="change()" id="choicecorrect2" type="text" name="choicecorrect"  placeholder="Enter answer"/>
                                 <input onchange="change()" id="choicepos2" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choiceembed2" type="text" name="choiceembed"  placeholder="Enter embed"/><br><br>
                                 <h4>Choice 3</h4>
                                 <input onchange="change()" id="choicetext3" type="text" name="choicetext"  placeholder="Enter choice text"/>
                                 <input onchange="change()" id="choicecorrect3" type="text" name="choicecorrect"  placeholder="Enter answer"/>
                                 <input onchange="change()" id="choicepos3" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choiceembed3" type="text" name="choiceembed"  placeholder="Enter embed"/><br><br>
                                 <h4>Choice 4</h4>
                                 <input onchange="change()" id="choicetext4" type="text" name="choicetext"  placeholder="Enter choice text"/>
                                 <input onchange="change()" id="choicecorrect4" type="text" name="choicecorrect"  placeholder="Enter answer"/>
                                 <input onchange="change()" id="choicepos4" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choiceembed4" type="text" name="choiceembed"  placeholder="Enter embed"/><br><br>
 
                                 <label>Add Topic</label><input id="addtopic" onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
                                 <label>Add Embed</label><input id="addembed" onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
@@ -89,6 +94,10 @@
           'text4': $("#choicetext4").val(),
           'pos4': $("#choicepos4").val(),
           'correct4': $("#choicecorrect4").val(),
+          'embed1': $("#choiceembed1").val(),
+          'embed2': $("#choiceembed2").val(),
+          'embed3': $("#choiceembed3").val(),
+          'embed4': $("#choiceembed4").val(),
           'pdf': "",
         },
         dataType: 'json',

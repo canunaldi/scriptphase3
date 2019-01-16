@@ -21,17 +21,37 @@ pdfpath = "temp/pdf/"
 
 def add_question_detail(request):
     print("==========ADD QUESTION STARTED==========")
+
+    body = ""
+    topic = []
+    embeds = []
+    choices = []
+    date = None
+    parent = None
+    print(request.POST)
     if request.method == 'POST':
-        body = request.POST['addbody']
-        print(body)
-        if request.POST.getlist('addtopic') != []:
-            topic = request.POST['addtopic']
-            print(topic)
-        if request.POST.getlist('addEmbed') != []:
-            embed = request.POST['addEmbed']
-            print(embed)
+        body = request.POST.getlist('addbody')[0]
+        print("body: ", body)
+        if request.POST['addtopic'] != '':
+            topic = request.POST.getlist('addtopic')
+            print("topic: ", topic)
+        if request.POST['addEmbed'] != '':
+            embed = request.POST.getlist('addEmbed')
+            print("embed: ", embed)
+        if request.POST['addAskDate'] != '':
+            pass
+        if request.POST['addParent'] != '':
+            parent = request.POST['addParent']
+        print(request.POST.getlist('choicetext'), request.POST.getlist('choicecorrect'), request.POST.getlist('choicepos'))
+        for text, corr, pos in zip(request.POST.getlist('choicetext'), request.POST.getlist('choicecorrect'), request.POST.getlist('choicepos')):
+            choices.append([text, corr, pos])
+            print([text, corr, pos])
+
+        print("final: ", choices)
     else:
-        print("olmadii")
+        print("#####Something happened.#####")
+
+    return render(request, 'application/question_added.html')
 
 def addquestion(request):
     question_latex =  """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n None. \\begin{questions}\n"""

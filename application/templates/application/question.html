@@ -76,7 +76,9 @@
                 {% if question_pdf %}
                         <div class="container">
                             {% load static %}
-                            <embed src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
+                            <div id="newpdf">
+
+                            </div>
                         </div>
                         <div id="pdfRendered">
 
@@ -144,6 +146,7 @@
         },
         dataType: 'json',
         success: function (data) {
+          document.getElementById("newpdf").value = <embed src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
           console.log(data.pdf)
         }
       });

@@ -44,7 +44,6 @@ def pdfcreatefornew(request):
     date = request.GET.get('date', None)
     print(date)
     choiceembed1 = request.GET.get('choiceembed1', None)
-    print(choice1)
     choice1text = request.GET.get('choicetext1', None)
     print(choice1text)
     choice1correct = request.GET.get('choicecorrect1', None)
@@ -52,7 +51,6 @@ def pdfcreatefornew(request):
     choice1pos = request.GET.get('choicepos1', None)
     print(choice1pos)
     choiceembed2 = request.GET.get('choiceembed2', None)
-    print(choice2)
     choice2text = request.GET.get('choicetext2', None)
     print(choice2text)
     choice2correct = request.GET.get('choicecorrect2', None)
@@ -60,7 +58,6 @@ def pdfcreatefornew(request):
     choice2pos = request.GET.get('choicepos2', None)
     print(choice2pos)
     choiceembed3 = request.GET.get('choiceembed3', None)
-    print(choice3)
     choice3text = request.GET.get('choicetext3', None)
     print(choice3text)
     choice3correct = request.GET.get('choicecorrect3', None)
@@ -68,7 +65,6 @@ def pdfcreatefornew(request):
     choice3pos = request.GET.get('choicepos3', None)
     print(choice3pos)
     choiceembed4 = request.GET.get('choiceembed4', None)
-    print(choice4)
     choice4text = request.GET.get('choicetext4', None)
     print(choice4text)
     choice4correct = request.GET.get('choicecorrect4', None)
@@ -80,9 +76,9 @@ def pdfcreatefornew(request):
     shuffled = True
     current_question = Question(qid=999, latexbody = latex, qdate = date, parent = parent)
     choice1 = Choice(choiceid = 1000, choicetext = choice1text, flag = choice1correct, pos = choice1pos, qid=current_question, embed= currentembed1)
-    choice2 = Choice(choiceid = 1000, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= currentembed2)
-    choice3 = Choice(choiceid = 1000, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= currentembed3)
-    choice4 = Choice(choiceid = 1000, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= currentembed4)
+    choice2 = Choice(choiceid = 1001, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= currentembed2)
+    choice3 = Choice(choiceid = 1002, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= currentembed3)
+    choice4 = Choice(choiceid = 1003, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= currentembed4)
     choices = [choice1, choice2, choice3, choice4]
     output = """"""
     output += r"""\question """

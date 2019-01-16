@@ -9,6 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <style>
         .mytable{
             border: 1px solid black;
@@ -45,21 +47,21 @@
                 <form action="{% url 'question_detail' %}" method="POST">
                     {% csrf_token %}
                     <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
-                    <label>UPDATE BODY</label><input type="text" name="updatebody" placeholder="Enter New Body"/><br><br>
-                    <label>ADD TOPIC</label><input type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
-                    <label>DELETE TOPIC</label><input type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
-                    <label>ADD EMBED</label><input type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
-                    <label>DELETE EMBED</label><input type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
-                    <label>UPDATE PARENT</label><input type="text" name="updateParent" placeholder="Enter New Parent"/><br><br>
-                    <label>UPDATE ASK DATE</label><input type="text" name="updateAskDate" placeholder="Enter New Date"/><br><br>
+                    <label>UPDATE BODY</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
+                    <label>ADD TOPIC</label><input id="addtopic" onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
+                    <label>DELETE TOPIC</label><input id="deletetopic" onchange="change()" type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
+                    <label>ADD EMBED</label><input id="addembed" onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
+                    <label>DELETE EMBED</label><input id="deleteembed" onchange="change()" type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
+                    <label>UPDATE PARENT</label><input id="parent" onchange="change()" type="text" name="updateParent" value="{{question.parent}}" placeholder="Enter New Parent"/><br><br>
+                    <label>UPDATE ASK DATE</label><input id="date" onchange="change()" type="text" name="updateAskDate" value="{{question.date}}" placeholder="Enter New Date"/><br><br>
                     {% if choices %}
                     <label>UPDATE CHOICE</label> <label>Yes</label><input type="radio" name="choiceyes"/> <label>No</label><input type="radio" name="choiceno"/><br><br>
                     
                     {% for choice in choices %}
-                    <input type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
-                    <input type="text" name="choicetext" placeholder="Enter New Text"/>
-                    <input type="text" name="choicecorrect" placeholder="Enter Correct/Not(1/0)"/>
-                    <input type="text" name="choicepos" placeholder="Enter New Pos"/><br><br>
+                    <input onchange="change()" id="choice{{ forloop.counter }}" type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
+                    <input onchange="change()" id="text{{ forloop.counter }}" type="text" name="choicetext" value="{{choice.choicetext}}"/>
+                    <input onchange="change()" id="correct{{ forloop.counter }}" type="text" name="choicecorrect" value="{{choice.flag}}"/>
+                    <input onchange="change()" id="pos{{ forloop.counter }}" type="text" name="choicepos" value="{{choice.pos}}"/><br><br>
                     {% endfor %}
                     {% endif %}
                     <label>DELETE THIS QUESTION</label> <label>Yes</label><input type="radio" name="deleteyes"/> <label>No</label><input type="radio" name="deleteno"/><br><br>
@@ -74,9 +76,10 @@
                 {% if question_pdf %}
                         <div class="container">
                             {% load static %}
-                            <embed src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
+                            <embed id="newpdf" src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
                         </div>
                         <div id="pdfRendered">
+
                         </div>
                 {% endif %}
             </div>
@@ -100,14 +103,55 @@
 
     }
 
-    var pdf = new PDFObject({
-  url: "https://something.com/HTC_One_XL_User_Guide.pdf",
-  id: "pdfRendered",
-  pdfOpenParams: {
-    view: "FitH"
-  }
-}).embed("pdfRenderer");
-console.log
+    function change(){
+        console.log("Change e girdi")
+        console.log($("#addtopic").val())
+        console.log($("#deltopic").val())
+        console.log($("#addembed").val())
+        console.log($("#delembed").val())
+        console.log($("#parent").val())
+        console.log($("#date").val())
+        console.log($("#choice1").val())
+
+        $.ajax({
+        url: '{% url "pdfcreate" %}',
+        data: {
+          'question_id': $("#question_id").val(),
+          'latex': $("#question_latex").val(),
+          'addtopic': $("#addtopic").val(),
+          'deltopic': $("#deltopic").val(),
+          'addembed': $("#addembed").val(),
+          'delembed': $("#delembed").val(),
+          'parent': $("#parent").val(),
+          'date': $("#date").val(),
+          'choice1': $("#choice1").val(),
+          'text1': $("#text1").val(),
+          'pos1': $("#pos1").val(),
+          'correct1': $("#correct1").val(),
+          'choice2': $("#choice2").val(),
+          'text2': $("#text2").val(),
+          'pos2': $("#pos2").val(),
+          'correct2': $("#correct2").val(),
+          'choice3': $("#choice3").val(),
+          'text3': $("#text3").val(),
+          'pos3': $("#pos3").val(),
+          'correct3': $("#correct3").val(),
+          'choice4': $("#choice4").val(),
+          'text4': $("#text4").val(),
+          'pos4': $("#pos4").val(),
+          'correct4': $("#correct4").val(),
+          'pdf': "",
+        },
+        dataType: 'json',
+        success: function (data) {
+            var embed = "<embed id=" + '"newpdf"' + "src = " +'{% static ' + "current_question.pdf" + ' %}'+ "width=" + '500px' + " height=" + '500px' + "/>"
+            var pdf =  document.getElementById("pdfRendered"); 
+            console.log(pdf.childNodes)
+            pdf.innerHTML = embed;
+        }
+      });
+        
+    }
 
 
 </script>

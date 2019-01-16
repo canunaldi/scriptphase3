@@ -145,9 +145,8 @@
         dataType: 'json',
         success: function (data) {
             var embed = "<embed id=" + '"newpdf"' + "src = " +'"localhost:8000/application/static/current_question.pdf"'+ " width=" + '"500px"' + " height=" + '"500px"' + "/>"
-            var pdf =  document.getElementById("pdfRendered");
+            var pdf =  $('#pdfrendered')
             var embedelement = $('embed')
-            var pdfelement = $('pdf')
             console.log(pdf)
             console.log(embedelement) 
             pdf.removeChild(pdf.childNodes[0]);

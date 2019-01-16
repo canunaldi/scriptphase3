@@ -48,20 +48,20 @@
                     {% csrf_token %}
                     <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
                     <label>UPDATE BODY</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
-                    <label>ADD TOPIC</label><input onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
-                    <label>DELETE TOPIC</label><input onchange="change()" type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
-                    <label>ADD EMBED</label><input onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
-                    <label>DELETE EMBED</label><input onchange="change()" type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
-                    <label>UPDATE PARENT</label><input onchange="change()" type="text" name="updateParent" value="{{question.parent}}" placeholder="Enter New Parent"/><br><br>
-                    <label>UPDATE ASK DATE</label><input onchange="change()" type="text" name="updateAskDate" value="{{question.date}}" placeholder="Enter New Date"/><br><br>
+                    <label>ADD TOPIC</label><input id="addtopic" onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
+                    <label>DELETE TOPIC</label><input id="deletetopic" onchange="change()" type="text" name="deltopic" placeholder="Topic to be deleted"/><br><br>
+                    <label>ADD EMBED</label><input id="addembed" onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
+                    <label>DELETE EMBED</label><input id="deleteembed" onchange="change()" type="text" name="delEmbed" placeholder="Embed to be deleted"/><br><br>
+                    <label>UPDATE PARENT</label><input id="parent" onchange="change()" type="text" name="updateParent" value="{{question.parent}}" placeholder="Enter New Parent"/><br><br>
+                    <label>UPDATE ASK DATE</label><input id="date" onchange="change()" type="text" name="updateAskDate" value="{{question.date}}" placeholder="Enter New Date"/><br><br>
                     {% if choices %}
                     <label>UPDATE CHOICE</label> <label>Yes</label><input type="radio" name="choiceyes"/> <label>No</label><input type="radio" name="choiceno"/><br><br>
                     
                     {% for choice in choices %}
-                    <input onchange="change()" type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
-                    <input onchange="change()" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter New Text"/>
-                    <input onchange="change()" type="text" name="choicecorrect" value="{{choice.choicecorrect}}" placeholder="Enter Correct/Not(1/0)"/>
-                    <input onchange="change()" type="text" name="choicepos" value="{{choice.choicepos}}" placeholder="Enter New Pos"/><br><br>
+                    <input onchange="change()" id="choice{{ forloop.counter }}" type="text" name="choiceid" value="{{choice.choiceid}}" disabled/>
+                    <input onchange="change()" id="text{{ forloop.counter }}" type="text" name="choicetext" value="{{choice.choicetext}}"/>
+                    <input onchange="change()" id="correct{{ forloop.counter }}" type="text" name="choicecorrect" value="{{choice.flag}}"/>
+                    <input onchange="change()" id="pos{{ forloop.counter }}" type="text" name="choicepos" value="{{choice.pos}}"/><br><br>
                     {% endfor %}
                     {% endif %}
                     <label>DELETE THIS QUESTION</label> <label>Yes</label><input type="radio" name="deleteyes"/> <label>No</label><input type="radio" name="deleteno"/><br><br>
@@ -105,10 +105,41 @@
 
     function change(){
         console.log("Change e girdi")
+        console.log($("#addtopic").val())
+        console.log($("#deltopic").val())
+        console.log($("#addembed").val())
+        console.log($("#delembed").val())
+        console.log($("#parent").val())
+        console.log($("#date").val())
+        console.log($("#choice1").val())
+
         $.ajax({
         url: '{% url "pdfcreate" %}',
         data: {
-          'latex': $("#question_latex").val()
+          'question_id': $("#question_id").val(),
+          'latex': $("#question_latex").val(),
+          'addtopic': $("#addtopic").val(),
+          'deltopic': $("#deltopic").val(),
+          'addembed': $("#addembed").val(),
+          'delembed': $("#delembed").val(),
+          'parent': $("#parent").val(),
+          'date': $("#date").val(),
+          'choice1': $("#choice1").val(),
+          'text1': $("#text1").val(),
+          'pos1': $("#pos1").val(),
+          'correct1': $("#correct1").val(),
+          'choice2': $("#choice2").val(),
+          'text2': $("#text2").val(),
+          'pos2': $("#pos2").val(),
+          'correct2': $("#correct2").val(),
+          'choice3': $("#choice3").val(),
+          'text3': $("#text3").val(),
+          'pos3': $("#pos3").val(),
+          'correct3': $("#correct3").val(),
+          'choice4': $("#choice4").val(),
+          'text4': $("#text4").val(),
+          'pos4': $("#pos4").val(),
+          'correct4': $("#correct4").val(),
         },
         dataType: 'json',
         success: function (data) {

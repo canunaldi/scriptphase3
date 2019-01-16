@@ -110,8 +110,131 @@ def question_detail(request):
     return render(request, 'application/question_done.html')
 
 def pdfcreate(request):
+    question_id = request.GET.get('question_id', None)
+    question_id = question_id[:-1]
+    print(question_id)
     latex = request.GET.get('latex', None)
     print(latex)
+    addtopic = request.GET.get('addtopic', None)
+    print(addtopic)
+    deltopic = request.GET.get('deltopic', None)
+    print(deltopic)
+    addembed = request.GET.get('addembed', None)
+    print(addembed)
+    delembed = request.GET.get('delembed', None)
+    print(delembed)
+    parent = request.GET.get('parent', None)
+    print(parent)
+    date = request.GET.get('date', None)
+    print(date)
+    choice1 = request.GET.get('choice1', None)
+    print(choice1)
+    choice1text = request.GET.get('text1', None)
+    print(choice1text)
+    choice1correct = request.GET.get('correct1', None)
+    print(choice1correct)
+    choice1pos = request.GET.get('pos1', None)
+    print(choice1pos)
+    choice2 = request.GET.get('choice2', None)
+    print(choice2)
+    choice2text = request.GET.get('text2', None)
+    print(choice2text)
+    choice2correct = request.GET.get('correct2', None)
+    print(choice2correct)
+    choice2pos = request.GET.get('pos2', None)
+    print(choice2pos)
+    choice3 = request.GET.get('choice3', None)
+    print(choice3)
+    choice3text = request.GET.get('text3', None)
+    print(choice3text)
+    choice3correct = request.GET.get('correct3', None)
+    print(choice3correct)
+    choice3pos = request.GET.get('pos3', None)
+    print(choice3pos)
+    choice4 = request.GET.get('choice4', None)
+    print(choice4)
+    choice4text = request.GET.get('text4', None)
+    print(choice4text)
+    choice4correct = request.GET.get('correct4', None)
+    print(choice4correct)
+    choice4pos = request.GET.get('pos4', None)
+    print(choice4pos)
+
+    current_question = Question.objects.get(qid= question_id)
+    embeds = Has_Embed.objects.filter(qid=current_question,filename=addembed)
+    topics = BelongsTo.objects.filter(qid=current_question)
+    current_question.latexbody = latex
+    current_question.parent = parent
+    current_question.date = date
+    choices2 = Choice.objects.filter(qid = current_question)
+    choices = []
+    print(choices2)
+    shuffled = True
+    for choice in choices2:
+        print(choice.choiceid)
+        if str(choice.choiceid) == str(choice1):
+            choice.choicetext = choice1text
+            choice.flag = choice1correct
+            choice.pos = choice1pos
+        if str(choice.choiceid) == str(choice2):
+            choice.choicetext = choice2text
+            choice.flag = choice2correct
+            choice.pos = choice2pos
+        if str(choice.choiceid) == str(choice3):
+            choice.choicetext = choice3text
+            choice.flag = choice3correct
+            choice.pos = choice3pos
+        if str(choice.choiceid) == str(choice4):
+            choice.choicetext = choice4text
+            choice.flag = choice4correct
+            choice.pos = choice4pos
+        choices.append(choice)
+    print(choices)
+
+    output = """"""
+    output += r"""\question """
+    output += (current_question.latexbody + """\\newline
+""")
+    if embeds != None and embeds != []:
+        for embed in embeds:
+            output+=(r"""\includegraphics[height=3em]{""" + str(embed.filename) + """} \\newline
+""")
+
+
+    output+=(r"""\begin{oneparchoices}
+""")
+    multiFlag = 0
+    order = list(range(len(choices)))
+    if(shuffled==True):
+        random.shuffle(order)
+
+    for i in order:
+        output+=(r"""\choice """)
+        choice_embed = choices[i].embed
+        if choice_embed != None and choice_embed != []:
+            output+=(r"""\includegraphics[height=2em]{""" + str(choice_embed.filename) + """}
+""")
+        if choices[i].choicetext != "":
+            output+=(choices[i].choicetext)
+            output += ("""
+""")
+    output+=(r"""\end{oneparchoices}
+""")
+    for i in order:
+        if choices[i].flag == 1:
+            answer = i
+            break
+    latexcreator = """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n\\begin{questions}\n"""
+    latexcreator += output
+    latexcreator += (r"""\end{questions}
+\end{document}""")
+    with open("current_question.tex", "w") as f:
+            f.write(latexcreator)
+    cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "application/static", "current_question.tex"]
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
+    question_pdf = "current_question.pdf"
+    
 
 def qpdf(request):
     return render(request,'application/current_question.html')

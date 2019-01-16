@@ -20,9 +20,6 @@ pdfpath = "temp/pdf/"
 
 
 def add_question_detail(request):
-    pass
-
-def addquestion(request):
     print("==========ADD QUESTION STARTED==========")
     if request.method == 'POST':
         body = request.POST['addbody']
@@ -35,8 +32,18 @@ def addquestion(request):
             print(embed)
     else:
         print("olmadii")
-    print("==========ADD QUESTION ENDED==========")
-            
+
+def addquestion(request):
+    question_latex =  """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n None. \\begin{questions}\n"""
+    question_latex += (r"""\end{questions}
+\end{document}""")
+    with open("current_question.tex", "w") as f:
+            f.write(question_latex)
+        cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "application/static", "current_question.tex"]
+        proc = subprocess.Popen(cmd)
+        proc.communicate()
+        question_pdf = "current_question.pdf"
+                
         
 
     return render(request, 'application/addquestion.html')

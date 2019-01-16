@@ -236,6 +236,9 @@ def pdfcreate(request):
     proc = subprocess.Popen(cmd)
     proc.communicate()
     question_pdf = "current_question.pdf"
+    data = {
+        'pdf': question_pdf
+    }
     return JsonResponse(data)
     
 

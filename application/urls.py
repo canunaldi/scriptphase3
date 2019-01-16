@@ -15,4 +15,5 @@ urlpatterns = [
     path('question/current_question.pdf', views.qpdf, name='qpdf'),
     path('add_question_detail', views.add_question_detail, name='add_question_detail'),
     url(r'^ajax/pdfcreate$', views.pdfcreate, name='pdfcreate'),
+    url(r'^ajax/pdfcreatefornew$', views.pdfcreatefornew, name='pdfcreatefornew'),
 ] 

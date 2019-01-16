@@ -75,7 +75,7 @@
     <script>
         function change(){
         $.ajax({
-        url: '{% url "pdfcreate" %}',
+        url: '{% url "pdfcreatefornew" %}',
         data: {
           'latex': $("#question_latex").val(),
           'addtopic': $("#addtopic").val(),

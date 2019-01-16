@@ -21,37 +21,120 @@ pdfpath = "temp/pdf/"
 
 def add_question_detail(request):
     print("==========ADD QUESTION STARTED==========")
-
-    body = ""
-    topic = []
-    embeds = []
-    choices = []
-    date = None
-    parent = None
-    print(request.POST)
     if request.method == 'POST':
-        body = request.POST.getlist('addbody')[0]
-        print("body: ", body)
-        if request.POST['addtopic'] != '':
-            topic = request.POST.getlist('addtopic')
-            print("topic: ", topic)
-        if request.POST['addEmbed'] != '':
-            embed = request.POST.getlist('addEmbed')
-            print("embed: ", embed)
-        if request.POST['addAskDate'] != '':
-            pass
-        if request.POST['addParent'] != '':
-            parent = request.POST['addParent']
-        print(request.POST.getlist('choicetext'), request.POST.getlist('choicecorrect'), request.POST.getlist('choicepos'))
-        for text, corr, pos in zip(request.POST.getlist('choicetext'), request.POST.getlist('choicecorrect'), request.POST.getlist('choicepos')):
-            choices.append([text, corr, pos])
-            print([text, corr, pos])
-
-        print("final: ", choices)
+        body = request.POST['addbody']
+        print(body)
+        if request.POST.getlist('addtopic') != []:
+            topic = request.POST['addtopic']
+            print(topic)
+        if request.POST.getlist('addEmbed') != []:
+            embed = request.POST['addEmbed']
+            print(embed)
     else:
-        print("#####Something happened.#####")
+        print("olmadii")
+def pdfcreatefornew(request):
+    latex = request.GET.get('latex', None)
+    print(latex)
+    addtopic = request.GET.get('addtopic', None)
+    print(addtopic)
+    addembed = request.GET.get('addembed', None)
+    print(addembed)
+    parent = request.GET.get('parent', None)
+    print(parent)
+    date = request.GET.get('date', None)
+    print(date)
+    choiceembed1 = request.GET.get('choiceembed1', None)
+    print(choice1)
+    choice1text = request.GET.get('choicetext1', None)
+    print(choice1text)
+    choice1correct = request.GET.get('choicecorrect1', None)
+    print(choice1correct)
+    choice1pos = request.GET.get('choicepos1', None)
+    print(choice1pos)
+    choiceembed2 = request.GET.get('choiceembed2', None)
+    print(choice2)
+    choice2text = request.GET.get('choicetext2', None)
+    print(choice2text)
+    choice2correct = request.GET.get('choicecorrect2', None)
+    print(choice2correct)
+    choice2pos = request.GET.get('choicepos2', None)
+    print(choice2pos)
+    choiceembed3 = request.GET.get('choiceembed3', None)
+    print(choice3)
+    choice3text = request.GET.get('choicetext3', None)
+    print(choice3text)
+    choice3correct = request.GET.get('choicecorrect3', None)
+    print(choice3correct)
+    choice3pos = request.GET.get('choicepos3', None)
+    print(choice3pos)
+    choiceembed4 = request.GET.get('choiceembed4', None)
+    print(choice4)
+    choice4text = request.GET.get('choicetext4', None)
+    print(choice4text)
+    choice4correct = request.GET.get('choicecorrect4', None)
+    print(choice4correct)
+    choice4pos = request.GET.get('choicepos4', None)
+    print(choice4pos)
+    newembed = Embed(filename= addembed)
+    embeds = [newembed]
+    shuffled = True
+    current_question = Question(qid=999, latexbody = latex, qdate = date, parent = parent)
+    choice1 = Choice(choiceid = 1000, choicetext = choice1text, flag = choice1correct, pos = choice1pos, qid=current_question, embed= currentembed1)
+    choice2 = Choice(choiceid = 1000, choicetext = choice2text, flag = choice2correct, pos = choice2pos, qid=current_question, embed= currentembed2)
+    choice3 = Choice(choiceid = 1000, choicetext = choice3text, flag = choice3correct, pos = choice3pos, qid=current_question, embed= currentembed3)
+    choice4 = Choice(choiceid = 1000, choicetext = choice4text, flag = choice4correct, pos = choice4pos, qid=current_question, embed= currentembed4)
+    choices = [choice1, choice2, choice3, choice4]
+    output = """"""
+    output += r"""\question """
+    output += (current_question.latexbody + """\\newline
+""")
+    if embeds != None and embeds != []:
+        for embed in embeds:
+            output+=(r"""\includegraphics[height=3em]{""" + str(embed.filename) + """} \\newline
+""")
 
-    return render(request, 'application/question_added.html')
+
+    output+=(r"""\begin{oneparchoices}
+""")
+    multiFlag = 0
+    order = list(range(len(choices)))
+    if(shuffled==True):
+        random.shuffle(order)
+
+    for i in order:
+        output+=(r"""\choice """)
+        choice_embed = choices[i].embed
+        if choice_embed != None and choice_embed != []:
+            output+=(r"""\includegraphics[height=2em]{""" + str(choice_embed.filename) + """}
+""")
+        if choices[i].choicetext != "":
+            output+=(choices[i].choicetext)
+            output += ("""
+""")
+    output+=(r"""\end{oneparchoices}
+""")
+    for i in order:
+        if choices[i].flag == 1:
+            answer = i
+            break
+    latexcreator = """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n\\begin{questions}\n"""
+    latexcreator += output
+    latexcreator += (r"""\end{questions}
+\end{document}""")
+    with open("current_question.tex", "w") as f:
+            f.write(latexcreator)
+    cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "application/static", "current_question.tex"]
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
+    question_pdf = "current_question.pdf"
+    data = {
+        'pdf': question_pdf
+    }
+    return JsonResponse(data)
+
+
+
+
 
 def addquestion(request):
     question_latex =  """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n None. \\begin{questions}\n"""
@@ -160,11 +243,7 @@ def question_detail(request):
 
 def pdfcreate(request):
     question_id = request.GET.get('question_id', None)
-    print(question_id)
-    if question_id != None and question_id != "":
-        question_id = question_id[:-1]
-    else:
-        question_id = -1
+    question_id = question_id[:-1]
     print(question_id)
     latex = request.GET.get('latex', None)
     print(latex)
@@ -213,10 +292,7 @@ def pdfcreate(request):
     choice4pos = request.GET.get('pos4', None)
     print(choice4pos)
 
-    if question_id != -1:
-        current_question = Question.objects.get(qid= question_id)
-    else:
-        current_question = Question(qid = 9999)
+    current_question = Question.objects.get(qid= question_id)
     
     allembeds = Has_Embed.objects.filter(qid=current_question)
     embeds = []

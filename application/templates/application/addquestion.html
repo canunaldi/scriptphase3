@@ -24,28 +24,29 @@
                     <tr>
                         <h1>Add New Question</h1>
                         <form action="{% url 'add_question_detail' %}" method="POST">
-                                <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
+                                <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="updatebody"  placeholder="Enter New Body"/><br><br>
                                 <h4>Choice 1</h4>
-                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
-                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
-                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choicetext1" type="text" name="choicetext"  placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect1" type="text" name="choicecorrect"  placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos1" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
                                 <h4>Choice 2</h4>
-                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
-                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
-                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choicetext2" type="text" name="choicetext"  placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect2" type="text" name="choicecorrect"  placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos2" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
                                 <h4>Choice 3</h4>
-                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
-                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
-                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choicetext3" type="text" name="choicetext"  placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect3" type="text" name="choicecorrect"  placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos3" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
                                 <h4>Choice 4</h4>
-                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
-                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
-                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <input onchange="change()" id="choicetext4" type="text" name="choicetext"  placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect4" type="text" name="choicecorrect"  placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos4" type="text" name="choicepos"  placeholder="Enter position"/><br><br>
 
                                 <label>Add Topic</label><input id="addtopic" onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
                                 <label>Add Embed</label><input id="addembed" onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
-                                <label>Add Date</label><input id="date" onchange="change()" type="text" name="addAskDate" value="{{question.date}}" placeholder="Enter New Date"/><br><br>
-                                
+                                <label>Add Date</label><input id="date" onchange="change()" type="text" name="addAskDate"  placeholder="Enter New Date"/><br><br>
+                                <label>Add PARENT</label><input id="parent" onchange="change()" type="text" name="addParent" placeholder="Enter New Parent"/><br><br>
+
                                 <input type="submit">
                             </form>
                         </td>
@@ -53,36 +54,57 @@
                 </table>
             </div>
             <div class="col-6">
-                {% if question_pdf %}
-                        <div class="container">
-                            {% load static %}
-                            <embed id="newpdf" src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
-                        </div>
-                        <div id="pdfRendered">
 
-                        </div>
-                {% endif %}
+                    <div id="pdfRendered">
+                            <embed id="newpdf" src = "/static/current_question.pdf" width="500px" height="500px"/>
+
+                        </div>  
             </div>  
 
         </div>
 
     </div>
 
-    <!-- <table class="mytable">
-            <tr>
-                <th style="border-right: 1px solid black; width: 7%;">
-                    <h2>{{question.qid}}</h2>
-                </th>
-                <th>
-                    <h3>{{question.latexbody}}</h3>
-                </th>
-                <th style="text-align:right; border-left: 1px solid black; width: 7%;">
-                    <button onclick="question({{question.qid}})">
-                        Change
-                    </button>
-                </th>
-            </tr>
-        </table> -->
+    <script>
+        function change(){
+        $.ajax({
+        url: '{% url "pdfcreate" %}',
+        data: {
+          'latex': $("#question_latex").val(),
+          'addtopic': $("#addtopic").val(),
+          'addembed': $("#addembed").val(),
+          'parent': $("#parent").val(),
+          'date': $("#date").val(),
+          'text1': $("#choicetext1").val(),
+          'pos1': $("#choicepos1").val(),
+          'correct1': $("#choicecorrect1").val(),
+          'text2': $("#choicetext2").val(),
+          'pos2': $("#choicepos2").val(),
+          'correct2': $("#choicecorrect2").val(),
+          'text3': $("#choicetext3").val(),
+          'pos3': $("#choicepos3").val(),
+          'correct3': $("#choicecorrect3").val(),
+          'text4': $("#choicetext4").val(),
+          'pos4': $("#choicepos4").val(),
+          'correct4': $("#choicecorrect4").val(),
+          'pdf': "",
+        },
+        dataType: 'json',
+        success: function (data) {
+            var embed = "<embed id=" + '"newpdf"' + "src = " +'"/static/current_question.pdf"'+ " width=" + '"500px"' + " height=" + '"500px"' + "/>"
+            console.log(embed)
+            var pdf =  $('#pdfRendered');
+            var embedelement = $(embed);
+            console.log(pdf);
+            console.log(embedelement);
+            $('embed#newpdf').remove();
+            pdf.append(embedelement);
+        }
+      });
+        
+    }
+    
+    </script>
 
 
 

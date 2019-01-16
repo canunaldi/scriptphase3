@@ -19,6 +19,22 @@ import io
 pdfpath = "temp/pdf/"
 
 def addquestion(request):
+    print("==========ADD QUESTION STARTED==========")
+    if request.method == 'POST':
+        body = request.POST['addbody']
+        print(body)
+        if request.POST.getlist('addtopic') != []:
+            topic = request.POST['addtopic']
+            print(topic)
+        if request.POST.getlist('addEmbed') != []:
+            embed = request.POST['addEmbed']
+            print(embed)
+    else:
+        print("olmadii")
+    print("==========ADD QUESTION ENDED==========")
+            
+        
+
     return render(request, 'application/addquestion.html')
         
 

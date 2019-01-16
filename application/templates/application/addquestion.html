@@ -20,13 +20,72 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <h1>SOL</h1>
+                <table class=".mytable">
+                    <tr>
+                        <h1>Add New Question</h1>
+                        <form action="{% url 'question_detail' %}" method="POST">
+                                {% csrf_token %}
+                                <input id="question_id" type="text" name="question" hidden value = {{question.qid}}/>
+                                <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
+                                <h4>Choice 1</h4>
+                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <h4>Choice 2</h4>
+                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <h4>Choice 3</h4>
+                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+                                <h4>Choice 4</h4>
+                                <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>
+                                <input onchange="change()" id="choicecorrect" type="text" name="choicecorrect" value="{{choice.flag}}" placeholder="Enter answer"/>
+                                <input onchange="change()" id="choicepos" type="text" name="choicepos" value="{{choice.pos}}" placeholder="Enter position"/><br><br>
+
+                                <label>Add Topic</label><input id="addtopic" onchange="change()" type="text" name="addtopic" placeholder="Enter New Topic"/><br><br>
+                                <label>Add Embed</label><input id="addembed" onchange="change()" type="text" name="addEmbed" placeholder="Enter New Embed"/><br><br>
+                                <label>Add Date</label><input id="date" onchange="change()" type="text" name="addAskDate" value="{{question.date}}" placeholder="Enter New Date"/><br><br>
+                                
+                                <input type="submit">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="col-6">
-                <h1>SAG</h1>
+                {% if question_pdf %}
+                        <div class="container">
+                            {% load static %}
+                            <embed id="newpdf" src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
+                        </div>
+                        <div id="pdfRendered">
+
+                        </div>
+                {% endif %}
             </div>  
 
         </div>
 
     </div>
+
+    <!-- <table class="mytable">
+            <tr>
+                <th style="border-right: 1px solid black; width: 7%;">
+                    <h2>{{question.qid}}</h2>
+                </th>
+                <th>
+                    <h3>{{question.latexbody}}</h3>
+                </th>
+                <th style="text-align:right; border-left: 1px solid black; width: 7%;">
+                    <button onclick="question({{question.qid}})">
+                        Change
+                    </button>
+                </th>
+            </tr>
+        </table> -->
+
+
+
 </body>

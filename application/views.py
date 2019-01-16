@@ -181,10 +181,16 @@ def pdfcreate(request):
     current_question = Question.objects.get(qid= question_id)
     
     allembeds = Has_Embed.objects.filter(qid=current_question)
-    embeds = [allembeds]
+    embeds = []
+    for embed in allembeds:
+        embeds.append(embed)
     if addembed != '':
-        newEmbed = Embed(filename=addembed)
-        embeds.append(newEmbed)
+        isthereany = Embed.objects.get(filename=addembed)
+        if isthereany == None:
+            newEmbed = Embed(filename=addembed)
+            embeds.append(newEmbed)
+        else:
+            embeds.append(isthereany)
     topics = BelongsTo.objects.filter(qid=current_question)
     current_question.latexbody = latex
     current_question.parent = parent
@@ -213,7 +219,7 @@ def pdfcreate(request):
             choice.pos = choice4pos
         choices.append(choice)
     print(choices)
-
+    print(embeds)
     output = """"""
     output += r"""\question """
     output += (current_question.latexbody + """\\newline

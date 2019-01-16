@@ -1,27 +1,27 @@
 Booklet A
 
-1,A
-2,B
-3,B
-4,D
-5,A
+1,B
+2,A
+3,D
+4,A
+5,B
 6,D
 7,A
 Booklet B
 
 1,D
-2,B
+2,A
 3,D
-4,A
-5,B
-6,A
+4,B
+5,A
+6,B
 7,A
 Booklet C
 
-1,B
-2,B
-3,A
-4,A
+1,A
+2,D
+3,B
+4,B
 5,A
-6,D
+6,A
 7,D

@@ -755,8 +755,7 @@ def getPDFKey(booklet,no):
 
     with open("answerkey" + str(no) + ".tex", 'w') as f:
         f.write(key)
-
-    cmd = ['pdflatex', '-interaction', 'nonstopmode', "answerkey" + str(no) + ".tex"]
+    cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "temp/pdf", "answerkey" + str(no) + ".tex"]
 
     proc = subprocess.Popen(cmd)
     proc.communicate()
@@ -769,7 +768,7 @@ def getCSVKey(booklets):
 		
     mapper = {0:"A", 1:"B", 2:"C", 3:"D", 4:"E"}
 
-    f = open("answers.csv", 'w')
+    f = open("temp/pdf/answers.csv", 'w')
     try:
         for num, booklet in enumerate(booklets):
             f.write("Booklet " + mapper[num] + "\n\n")

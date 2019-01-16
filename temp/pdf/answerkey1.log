@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 JAN 2019 19:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 JAN 2019 19:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**booklet2.tex
-(temp/pdf/booklet2.tex
+**answerkey1.tex
+(./answerkey1.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 5 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/exam/exam.cls
@@ -130,22 +130,21 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen106
 \Gin@req@width=\dimen107
 )
-(temp/pdf/booklet2.aux)
-\openout1 = `booklet2.aux'.
+No file answerkey1.aux.
+\openout1 = `answerkey1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
-LaTeX Font Info:    ... okay on input line 4.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count123
@@ -207,52 +206,59 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<faruk.jpg, id=1, 401.5pt x 401.5pt>
+<arifisik.jpg, id=1, 384.43625pt x 384.43625pt>
+File: arifisik.jpg Graphic file (type jpg)
+ <use arifisik.jpg>
+Package pdftex.def Info: arifisik.jpg used on input line 7.
+(pdftex.def)             Requested size: 19.99724pt x 20.00003pt.
+
+<faruk.jpg, id=2, 401.5pt x 401.5pt>
 File: faruk.jpg Graphic file (type jpg)
  <use faruk.jpg>
 Package pdftex.def Info: faruk.jpg used on input line 8.
 (pdftex.def)             Requested size: 19.99652pt x 20.00003pt.
 
-<arifisik.jpg, id=2, 384.43625pt x 384.43625pt>
-File: arifisik.jpg Graphic file (type jpg)
- <use arifisik.jpg>
-Package pdftex.def Info: arifisik.jpg used on input line 9.
-(pdftex.def)             Requested size: 19.99724pt x 20.00003pt.
-
 <komutanlogar.jpeg, id=3, 304.13625pt x 166.6225pt>
 File: komutanlogar.jpeg Graphic file (type jpg)
  <use komutanlogar.jpeg>
-Package pdftex.def Info: komutanlogar.jpeg used on input line 10.
+Package pdftex.def Info: komutanlogar.jpeg used on input line 9.
 (pdftex.def)             Requested size: 36.50404pt x 20.00003pt.
 
 <216.jpg, id=4, 211.79124pt x 211.79124pt>
 File: 216.jpg Graphic file (type jpg)
  <use 216.jpg>
-Package pdftex.def Info: 216.jpg used on input line 11.
+Package pdftex.def Info: 216.jpg used on input line 10.
 (pdftex.def)             Requested size: 19.99757pt x 20.00003pt.
 
 <rendroy2.jpg, id=5, 642.4pt x 337.26pt>
 File: rendroy2.jpg Graphic file (type jpg)
  <use rendroy2.jpg>
-Package pdftex.def Info: rendroy2.jpg used on input line 14.
+Package pdftex.def Info: rendroy2.jpg used on input line 20.
 (pdftex.def)             Requested size: 57.13715pt x 30.00005pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./faruk.jpg> <./arifisik.j
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./arifisik.jpg> <./faruk.j
 pg> <./komutanlogar.jpeg> <./216.jpg> <./rendroy2.jpg>]
 This exam contains 3 questions with 0 parts, 0 subparts, and 0 subsubparts.
-(temp/pdf/booklet2.aux) ) 
+
+Class exam Warning: Point totals have changed. Rerun to get point totals right.
+
+
+(temp/pdf/answerkey1.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2486 strings out of 494910
- 34643 string characters out of 6179835
- 101255 words of memory out of 5000000
+ 2484 strings out of 494910
+ 34600 string characters out of 6179835
+ 101126 words of memory out of 5000000
  5785 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 37i,9n,23p,234b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr10.pfb>
-Output written on temp/pdf/booklet2.pdf (1 page, 119685 bytes).
+ 37i,9n,23p,238b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on temp/pdf/answerkey1.pdf (1 page, 119917 bytes).
 PDF statistics:
  17 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream

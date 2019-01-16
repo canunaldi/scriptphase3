@@ -163,6 +163,8 @@ def pdfcreate(request):
     print(question_id)
     if question_id != None and question_id != "":
         question_id = question_id[:-1]
+    else:
+        question_id = -1
     print(question_id)
     latex = request.GET.get('latex', None)
     print(latex)
@@ -211,7 +213,10 @@ def pdfcreate(request):
     choice4pos = request.GET.get('pos4', None)
     print(choice4pos)
 
-    current_question = Question.objects.get(qid= question_id)
+    if question_id != -1:
+        current_question = Question.objects.get(qid= question_id)
+    else:
+        current_question = Question(qid = 9999)
     
     allembeds = Has_Embed.objects.filter(qid=current_question)
     embeds = []

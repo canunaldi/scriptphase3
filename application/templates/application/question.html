@@ -147,7 +147,9 @@
             var embed = "<embed id=" + '"newpdf"' + "src = " +'"localhost:8000/application/static/current_question.pdf"'+ " width=" + '"500px"' + " height=" + '"500px"' + "/>"
             var pdf =  document.getElementById("pdfRendered");
             var embedelement = $('embed')
-            var pdfelement = $('pdf') 
+            var pdfelement = $('pdf')
+            console.log(pdfelement)
+            console.log(embedelement) 
             pdfelement.removeChild(pdfelement.childNodes[0]);
             pdfelement.append(embedelement);
         }

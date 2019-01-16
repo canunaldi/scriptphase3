@@ -38,11 +38,11 @@ def addquestion(request):
     question_latex += (r"""\end{questions}
 \end{document}""")
     with open("current_question.tex", "w") as f:
-            f.write(question_latex)
-        cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "application/static", "current_question.tex"]
-        proc = subprocess.Popen(cmd)
-        proc.communicate()
-        question_pdf = "current_question.pdf"
+        f.write(question_latex)
+    cmd = ["pdflatex", "-interaction", "nonstopmode", "-output-directory", "application/static", "current_question.tex"]
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
+    question_pdf = "current_question.pdf"
                 
         
 

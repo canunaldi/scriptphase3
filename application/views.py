@@ -161,7 +161,7 @@ def question_detail(request):
 def pdfcreate(request):
     question_id = request.GET.get('question_id', None)
     print(question_id)
-    if question_id != None or question_id != "":
+    if question_id != None and question_id != "":
         question_id = question_id[:-1]
     print(question_id)
     latex = request.GET.get('latex', None)

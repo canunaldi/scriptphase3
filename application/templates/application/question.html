@@ -79,8 +79,9 @@
                             <embed id="newpdf" src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
                         </div>
                         <div id="pdfRendered">
+                            <embed id="newpdf" src = "{'localhost:8000/application/static/current_question.pdf'}" width="500px" height="500px"/>
 
-                        </div>
+                        </div>  
                 {% endif %}
             </div>
         </div>
@@ -145,11 +146,11 @@
         dataType: 'json',
         success: function (data) {
             var embed = "<embed id=" + '"newpdf"' + "src = " +'"localhost:8000/application/static/current_question.pdf"'+ " width=" + '"500px"' + " height=" + '"500px"' + "/>"
-            var pdf =  $('#pdfrendered')
-            var embedelement = $('embed')
-            console.log(pdf)
-            console.log(embedelement) 
-            pdf.removeChild(pdf.childNodes[0]);
+            var pdf =  $('#pdfrendered');
+            var embedelement = $('embed');
+            console.log(pdf);
+            console.log(embedelement);
+            $('embed#newpdf').remove();
             pdf.append(embedelement);
         }
       });

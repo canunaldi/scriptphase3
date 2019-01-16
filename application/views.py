@@ -652,6 +652,8 @@ def qbank_detail(request):
                 shuffle = True
             iterator = request.POST["getlatex"].split(",")
             answer = getLatex(iterator,shuffle)
+            response = FileResponse(open("exam.pdf", 'rb'), filename = "exam.pdf", as_attachment = True)
+            return response
         if "latextext" in request.POST:
             shuffle = False
             if "shufflelatextext" in request.POST:

@@ -179,7 +179,10 @@ def pdfcreate(request):
     print(choice4pos)
 
     current_question = Question.objects.get(qid= question_id)
-    embeds = Has_Embed.objects.filter(qid=current_question,filename=addembed)
+    embeds = Has_Embed.objects.filter(qid=current_question)
+    if addembed != '':
+        newEmbed = Has_Embed(qid=current_question, filename= addembed)
+        embeds.append(newEmbed)
     topics = BelongsTo.objects.filter(qid=current_question)
     current_question.latexbody = latex
     current_question.parent = parent

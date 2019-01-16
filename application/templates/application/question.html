@@ -146,8 +146,8 @@
         success: function (data) {
             var embed = "<embed id=" + '"newpdf"' + "src = " +'{% static ' + "current_question.pdf" + ' %}'+ "width=" + '500px' + " height=" + '500px' + "/>"
             var pdf =  document.getElementById("pdfRendered"); 
-            console.log(pdf.childNodes)
-            pdf.innerHTML = embed;
+            pdf.removeChild(pdf.childNodes[0]);
+            pdf.appendChild(embed);
         }
       });
         

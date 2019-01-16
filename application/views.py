@@ -487,7 +487,7 @@ def pdfcreate(request):
 def qpdf(request):
     return render(request,'application/current_question.html')
 
-def question(request):
+def question(request, question_id):
     question = []
     embeds = []
     choices = []
@@ -496,42 +496,39 @@ def question(request):
     result_choice = []
     result_topic = []
     question_latex = ""
-    if request.method == 'POST':
-        print(request.POST['question'])
-        if request.POST['question'] != '':
-            qid = request.POST['question']
-            try:
-                print("HEYYY")
-                question = Question.objects.get(qid = qid)
-                question_latex = """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n\\begin{questions}\n"""
+    qid = question_id
+    try:
+        print("HEYYY")
+        question = Question.objects.get(qid = qid)
+        question_latex = """\\documentclass{exam}\n\\usepackage{graphicx}\n\\begin{document}\n\\begin{questions}\n"""
 
-                question_latex += (question.getLatex())[0]
-                question_latex += (r"""\end{questions}
+        question_latex += (question.getLatex())[0]
+        question_latex += (r"""\end{questions}
 \end{document}""")
-                print("=======================================")
-                print(question_latex)
-                print("=======================================")
-            except Exception as e:
-                print(e)
-            try:
-                embeds = Has_Embed.objects.filter(qid = question)
-                for embed in embeds:
-                    result_embed.append(embed)
-            except:
-                pass
-            try:
-                choices = Choice.objects.filter(qid = question)
-                for choice in choices:
-                    result_choice.append(choice)
-            except:
-                pass
-            try:
-                topics = BelongsTo.objects.filter(qid = question)
-                for topic in topics:
-                    print(topic)
-                    result_topic.append(topic)
-            except:
-                pass
+        print("=======================================")
+        print(question_latex)
+        print("=======================================")
+    except Exception as e:
+        print(e)
+    try:
+        embeds = Has_Embed.objects.filter(qid = question)
+        for embed in embeds:
+            result_embed.append(embed)
+    except:
+        pass
+    try:
+        choices = Choice.objects.filter(qid = question)
+        for choice in choices:
+            result_choice.append(choice)
+    except:
+        pass
+    try:
+        topics = BelongsTo.objects.filter(qid = question)
+        for topic in topics:
+            print(topic)
+            result_topic.append(topic)
+    except:
+        pass
     question_pdf = None
     if question_latex != "":
         with open("current_question.tex", "w") as f:

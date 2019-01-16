@@ -26,19 +26,6 @@
                 <h1>{{question.latexbody}}</h1>
                 <h4>Parent = {{question.parent}}</h4>
                 <h4>Date = {{question.qdate}}</h4>
-                {% if embeds %}
-                    {% for embed in embeds %}
-                        <h3>{{embed.filename}}</h3>
-                    {% endfor %}
-                {% endif %}
-                {% if choices %}
-                    {% for choice in choices %}
-                    <h3>
-                        <a>{{choice.choiceid}} </a><a>{{choice.choicetext}} </a><a>{{choice.flag}} </a><a>{{choice.pos}} </a>
-                    </h3>
-            
-                    {% endfor %}
-                {% endif %}
                 {% if topics %}
                     {% for topic in topics %}
                         <h3>{{topic.topicname}}</h3>
@@ -67,8 +54,11 @@
                     <label>DELETE THIS QUESTION</label> <label>Yes</label><input type="radio" name="deleteyes"/> <label>No</label><input type="radio" name="deleteno"/><br><br>
                     <input type="submit">
                 </form>
+                <br>
+                <br>
                 <h3>GETTERS</h3>
-                <button onclick="getID()">Deneme</button>
+                <br>
+                <button onclick="getID()">getID</button>
                 <button onclick="getLatex()">getLatex</button>
                 <p style="width: 40%; height: 50px;" id="label"></p>
             </div>

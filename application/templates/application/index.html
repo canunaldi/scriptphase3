@@ -31,7 +31,26 @@
             </div>
         </div>
     </div>
-    <br><br><br>    
+    <br><br><br>
+
+    <div class="container">
+        <h1>QBANK FUNCTIONALITIES LISTED BELOW</h1>
+        <form action="{% url 'qbank_detail' %}" method="POST">
+            {% csrf_token %}
+            <label>Search By Topic </label><input type="radio" name="topic"/> <input type="text" name="topicsearch" placeholder="Enter Topic to Search"/><br><br>
+            <label>Search By Difficulty </label><input type="radio" name="difficulty"/><input type="text" name="difficultysearch" placeholder="Enter Difficulty to Search"/><br><br>
+            <label>Search By AskDate </label><input type="radio" name="askdate"/><input type="text" name="datesearchstart" placeholder="Start Date(YYYY-MM-DD)"/> <input type="text" name="datesearchend" placeholder="End Date(YYYY-MM-DD)"/><br><br>
+            <label>Get Latex </label><input type="radio" name="latex"/> <input type="text" name="getlatex" placeholder="Enter the Question IDs"/> <a>Shuffle</a><input type="checkbox" name="shufflelatex"/><br><br>
+            <label>Get Latex Text </label><input type="radio" name="latextext"/><input type="text" name="getlatextext" placeholder="Enter the Question IDs"/><a>Shuffle</a><input type="checkbox" name="shufflelatextext"/><br><br>
+            <label>Update Ask Date </label><input type="radio" name="updatedate"/> <input type="text" name="dateupdate" placeholder="Enter Question IDs to Update Their Dates"/><input type="text" name="newdate" placeholder="Enter New Date"/><br><br>
+            <input type="submit">
+        </form>
+        
+    </div>
+    <br>
+    
+    
+
     {% if questions %}
         <div class="container">
 
@@ -60,6 +79,11 @@
 </body>
 
 <script>
+    var radios = $('[type="radio"]');
+
+    radios.change(function() {
+    radios.not(this).prop('checked', false);
+    });
     function addquestion(){
         window.location = "/application/addquestion"
     }

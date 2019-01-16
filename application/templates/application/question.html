@@ -144,8 +144,8 @@
         },
         dataType: 'json',
         success: function (data) {
-            document.getElementById("pdfRendered").innerHTML = <embed id="newpdf" src = "{% static 'current_question.pdf' %}" width="500px" height="500px"/>
-
+            var embed = "<embed id=" + '"newpdf"' + "src = " +'{% static ' + "current_question.pdf" + ' %}'+ "width=" + '500px' + " height=" + '500px' + "/>"
+            document.getElementById("pdfRendered").innerHTML = embed
           console.log(data.pdf)
         }
       });

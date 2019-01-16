@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  15 JAN 2019 23:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.10.15)  16 JAN 2019 02:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -207,50 +207,26 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<arifisik.jpg, id=1, 384.43625pt x 384.43625pt>
-File: arifisik.jpg Graphic file (type jpg)
- <use arifisik.jpg>
-Package pdftex.def Info: arifisik.jpg used on input line 7.
-(pdftex.def)             Requested size: 19.99724pt x 20.00003pt.
+[1
 
-<komutanlogar.jpeg, id=2, 304.13625pt x 166.6225pt>
-File: komutanlogar.jpeg Graphic file (type jpg)
- <use komutanlogar.jpeg>
-Package pdftex.def Info: komutanlogar.jpeg used on input line 8.
-(pdftex.def)             Requested size: 36.50404pt x 20.00003pt.
-
-<faruk.jpg, id=3, 401.5pt x 401.5pt>
-File: faruk.jpg Graphic file (type jpg)
- <use faruk.jpg>
-Package pdftex.def Info: faruk.jpg used on input line 9.
-(pdftex.def)             Requested size: 19.99652pt x 20.00003pt.
-
-<216.jpg, id=4, 211.79124pt x 211.79124pt>
-File: 216.jpg Graphic file (type jpg)
- <use 216.jpg>
-Package pdftex.def Info: 216.jpg used on input line 10.
-(pdftex.def)             Requested size: 19.99757pt x 20.00003pt.
- [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./arifisik.jpg> <./komutan
-logar.jpeg> <./faruk.jpg> <./216.jpg>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 This exam contains 1 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (application/static/current_question.aux) ) 
 Here is how much of TeX's memory you used:
- 2463 strings out of 494910
- 34380 string characters out of 6179835
+ 2441 strings out of 494910
+ 34071 string characters out of 6179835
  100191 words of memory out of 5000000
- 5763 multiletter control sequences out of 15000+600000
+ 5747 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 37i,9n,23p,244b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,9n,23p,244b,162s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmr10.pfb>
-Output written on application/static/current_question.pdf (1 page, 79314 bytes)
+Output written on application/static/current_question.pdf (1 page, 15988 bytes)
 .
 PDF statistics:
- 16 PDF objects out of 1000 (max. 8388607)
+ 12 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

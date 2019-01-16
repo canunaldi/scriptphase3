@@ -71,6 +71,48 @@ def pdfcreatefornew(request):
     print(choice4correct)
     choice4pos = request.GET.get('choicepos4', None)
     print(choice4pos)
+    if latex == None:
+        latex = ""
+    if addtopic == None:
+        addtopic = ""
+    if addembed == None:
+        addembed = ""
+    if parent == None:
+        parent = ""
+    if date == None:
+        date = ""
+    if choiceembed1 == None:
+        choiceembed1 = ""
+    if choice1text == None:
+        choice1text = ""
+    if choice1correct == None:
+        choice1correct = ""
+    if choice1pos == None:
+        choice1pos = ""
+    if choiceembed2 == None:
+        choiceembed2 = ""
+    if choice2text == None:
+        choice2text = ""
+    if choice2correct == None:
+        choice2correct = ""
+    if choice2pos == None:
+        choice2pos = ""
+    if choiceembed3 == None:
+        choiceembed3 = ""
+    if choice3text == None:
+        choice3text = ""
+    if choice3correct == None:
+        choice3correct = ""
+    if choice3pos == None:
+        choice3pos = ""
+    if choiceembed4 == None:
+        choiceembed4 = ""
+    if choice4text == None:
+        choice4text = ""
+    if choice4correct == None:
+        choice4correct = ""
+    if choice4pos == None:
+        choice4pos = ""
     newembed = Embed(filename= addembed)
     embeds = [newembed]
     shuffled = True

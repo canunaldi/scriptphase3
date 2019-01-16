@@ -23,7 +23,7 @@
                 <table class=".mytable">
                     <tr>
                         <h1>Add New Question</h1>
-                        <form action="{% url 'question_detail' %}" method="POST">
+                        <form action="{% url 'add_question_detail' %}" method="POST">
                                 <label>Add Body</label><input id="question_latex" onchange="change()" type="text" name="updatebody" value="{{question.latexbody}}" placeholder="Enter New Body"/><br><br>
                                 <h4>Choice 1</h4>
                                 <input onchange="change()" id="choicetext" type="text" name="choicetext" value="{{choice.choicetext}}" placeholder="Enter choice text"/>

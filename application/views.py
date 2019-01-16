@@ -18,6 +18,10 @@ import io
 
 pdfpath = "temp/pdf/"
 
+
+def add_question_detail(request):
+    pass
+
 def addquestion(request):
     print("==========ADD QUESTION STARTED==========")
     if request.method == 'POST':

@@ -140,10 +140,11 @@
           'text4': $("#text4").val(),
           'pos4': $("#pos4").val(),
           'correct4': $("#correct4").val(),
+          'pdf': "",
         },
         dataType: 'json',
         success: function (data) {
-          console.log(data)
+          console.log(data.pdf)
         }
       });
         

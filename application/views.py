@@ -10,6 +10,8 @@ from django.http import HttpResponse, FileResponse
 from .forms import NameForm
 from django.core import serializers
 import zipfile
+from django.http import JsonResponse
+
 #from reportlab.pdfgen import canvas
 import io
 
@@ -234,6 +236,7 @@ def pdfcreate(request):
     proc = subprocess.Popen(cmd)
     proc.communicate()
     question_pdf = "current_question.pdf"
+    return JsonResponse(data)
     
 
 def qpdf(request):

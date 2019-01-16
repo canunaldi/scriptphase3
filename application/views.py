@@ -263,7 +263,7 @@ def index(request):
 def question_detail(request):
     print(request.POST)
     if request.method == 'POST':
-        qid = (request.POST['question'][:-1])
+        qid = (request.POST['question'])
         question = Question.objects.get(qid = qid)
         if request.POST['updatebody'] != '':
             newbody = request.POST['updatebody']

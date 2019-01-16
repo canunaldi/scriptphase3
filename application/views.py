@@ -300,7 +300,7 @@ def question_detail(request):
         if request.POST['delEmbed'] != '':
             embed = request.POST['delEmbed']
             Embed.objects.filter(filename= embed).delete()
-        if request.POST['updateParent'] != '':
+        if request.POST['updateParent'] != '' and request.POST['updateParent'] != 'None':
             newparent = request.POST['updateParent']
             question.parent = newparent
             question.save()
